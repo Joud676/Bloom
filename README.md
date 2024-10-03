@@ -1,9 +1,10 @@
-# Wallet Guard 
-An E-Wallet application developed to assist individuals in managing their monthly expenses and budgets with greater efficiency using JavaFX. 
+# Bloom
+A application designed to connect plant enthusiasts, sellers, and buyers in a 
+user-friendly platform using JavaFX. 
 # Used Process and Methodology 
 Agile process, scrum methodology 
 # Application Features 
-* Set a monthly budget 
-* Enter recurring expenses
-* Categorize expenses 
-* Generate analytical reports 
+* Browse and purchase new plants 
+* View plant guides and care instructions
+* Manage plant collections 
+* Set watering reminders 
