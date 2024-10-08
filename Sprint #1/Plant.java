@@ -95,5 +95,15 @@ public class Plant {
             return "The plants " + plant1.getName() + " and " + plant2.getName() + " cannot be fertilized together.";
         }
     }
+    @Override
+    public String toString() {
+        return "Plant ID: " + plantId + "\n" +
+                "Name: " + name + "\n" +
+                "Characteristics: " + characteristic + "\n" +
+                "Care Information: " + careInfo + "\n" +
+                "Price: " + price + "\n" +
+                "Quantity: " + quantity + "\n" +
+                "Fertilization: " + String.join(", ", fertilization);
+    }
 
 }
