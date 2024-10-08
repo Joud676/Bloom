@@ -97,7 +97,7 @@ public class Plant {
     }
     @Override
     public String toString() {
-        return "Plant ID: " + plantId + "\n" +
+        return "\nPlant ID: " + plantId + "\n" +
                 "Name: " + name + "\n" +
                 "Characteristics: " + characteristic + "\n" +
                 "Care Information: " + careInfo + "\n" +
