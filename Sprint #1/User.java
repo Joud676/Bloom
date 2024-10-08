@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.Random; // Importing Random class
 
 class User {
 
@@ -10,17 +11,14 @@ class User {
 	private String accountType;
 
 	public User(String username, String email, String password, String type) {
-
 		this.setUsername(username);
 		this.setEmail(email);
 		this.setPassword(password);
 		this.setAccountType(type);
-
 	}
 
 	@Override
 	public String toString() {
-
 		return super.toString();
 	}
 
@@ -57,11 +55,10 @@ class User {
 	}
 
 	public static User register() {
-
 		Scanner scanner = new Scanner(System.in);
+		Random random = new Random(); // Creating Random object
 
 		while (true) {
-
 			System.out.print("Enter username: ");
 			String username = scanner.nextLine().trim();
 
@@ -94,7 +91,6 @@ class User {
 							"Password must be at least 8 characters long and contain a mix of upper and lower case letters, numbers, and special characters.");
 					System.out.print("Please enter a valid password: ");
 					password = scanner.nextLine().trim();
-
 				}
 			}
 
@@ -124,8 +120,8 @@ class User {
 
 			File F = new File("users/");
 			F.mkdirs();
-			String fileName = username + ".txt";
-			File f = new File("users/"+fileName);
+			String fileName = username + "_" + random.nextInt(10000) + ".txt"; // Generating file name with random number
+			File f = new File("users/" + fileName);
 
 			try {
 				if (f.createNewFile()) {
@@ -137,27 +133,20 @@ class User {
 				}
 
 			} catch (FileNotFoundException ex) {
-
 				ex.printStackTrace();
-
 			} catch (IOException ex) {
-
 				ex.printStackTrace();
 			}
 			try {
 				FileWriter writeUser = new FileWriter(f);
 				writeUser.write(userData);
 				writeUser.close();
-			}
-
-			catch (IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 			return user;
-
 		}
-
 	}
 
 	private static boolean isValidEmail(String email) {
@@ -170,8 +159,6 @@ class User {
 		String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}$";
 		return Pattern.matches(passwordRegex, password);
 	}
-
-
 }
 
 class Seller extends User {
@@ -182,10 +169,10 @@ class Seller extends User {
 		super(username, email, password, type);
 		this.setStoreName(storeName);
 	}
+
 	public List<Plant> getPlants() {
 		return plants;
 	}
-
 
 	public void uploadPlant(Plant plant) {
 		if (plant != null) {
@@ -203,7 +190,8 @@ class Seller extends User {
 				System.out.println("Error saving plant to file: " + e.getMessage());
 			}
 
-			String sellerFileName = "users/" + getUsername() + ".txt";
+			Random random = new Random(); // Creating Random object
+			String sellerFileName = "users/" + getStoreName() + "_" + random.nextInt(10000) + ".txt"; // Generating file name with random number
 			try (FileWriter writer = new FileWriter(sellerFileName, true)) {
 				writer.write(plant.toString() + System.lineSeparator());
 				System.out.println("Plant " + plant.getName() + " details have been saved to your file.");
@@ -215,8 +203,6 @@ class Seller extends User {
 		}
 	}
 
-
-
 	public String getStoreName() {
 		return storeName;
 	}
@@ -227,29 +213,22 @@ class Seller extends User {
 
 	@Override
 	public String toString() {
-
 		String sellerData = ("Username: " + getUsername() + "\nEmail: " + getEmail() + "\nPassword: " + getPassword()
 				+ "\nAccount type: " + getAccountType() + "\nStore name: " + getStoreName());
-
 		return sellerData;
 	}
-
 }
 
 class Customer extends User {
 
 	public Customer(String username, String email, String password, String type) {
 		super(username, email, password, type);
-
 	}
 
 	@Override
 	public String toString() {
-
 		String customerData = ("Username: " + getUsername() + "\nEmail: " + getEmail() + "\nPassword: " + getPassword()
 				+ "\nAccount type: " + getAccountType());
-
 		return customerData;
 	}
-
 }
