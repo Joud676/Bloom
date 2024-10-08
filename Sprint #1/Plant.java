@@ -21,17 +21,79 @@ public class Plant {
         this.fertilization = fertilization;
     }
 
+    public void setPlantId(int plantId) {
+        this.plantId = plantId;
+    }
+
+    public void setFertilization(List<String> fertilization) {
+        this.fertilization = fertilization;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setCareInfo(String careInfo) {
+        this.careInfo = careInfo;
+    }
+
+    public void setCharacteristic(String characteristic) {
+        this.characteristic = characteristic;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPlantId() {
+        return plantId;
+    }
+
+    public List<String> getFertilization() {
+        return fertilization;
+    }
+
+    public String getCareInfo() {
+        return careInfo;
+    }
+
+    public String getCharacteristic() {
+        return characteristic;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
     public String plantDetails (int plantId){
         return toString();
     }
 
     public int checkQuantity(int plantId){
+
         return quantity;
+
+
     }
 
     public int getQuantity() {
         return quantity;
-    }
 
+    }
+//   public boolean checkfertilization(String plant){
+//
+//
+//
+//        return false;
+//
+//   }
 
 }
