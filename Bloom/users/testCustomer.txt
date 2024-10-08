@@ -1,0 +1,4 @@
+Username: testCustomer
+Email: test@example.com
+Password: Password123!
+Account type: Customer
