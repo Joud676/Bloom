@@ -88,12 +88,12 @@ public class Plant {
         return quantity;
 
     }
-//   public boolean checkfertilization(String plant){
-//
-//
-//
-//        return false;
-//
-//   }
+    public static String checkFertilization(Plant plant1, Plant plant2) {
+        if (plant1.getFertilization().contains(plant2.getName()) && plant2.getFertilization().contains(plant1.getName())) {
+            return "The plants " + plant1.getName() + " and " + plant2.getName() + " can be fertilized together.";
+        } else {
+            return "The plants " + plant1.getName() + " and " + plant2.getName() + " cannot be fertilized together.";
+        }
+    }
 
 }
