@@ -173,7 +173,7 @@ public class User {
 				ex.printStackTrace();
 			}
 
-			scanner.close();
+			
 			return user;
 
 		}
