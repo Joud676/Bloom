@@ -286,6 +286,24 @@ class RegisterationTest {
 		boolean actual = checkFile(userFile);
 		assertTrue(actual == true);
 	}
+	@Test
+	@Order(10)
+	void testInvalidCustomerFile() {
+		try {
+			Thread.sleep(Duration.ofMillis(5000));
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		username = "testCase5";
+		
+		// test if the user was stored
+		userFile = new File("users/" + username + ".txt");
+		boolean actual = checkFile(userFile);
+		// an invalid registration should not be logged 
+		assertTrue(actual == false);
+	}
 
 	public static boolean checkFile(File userFile) {
 		boolean found;

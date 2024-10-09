@@ -20,10 +20,6 @@ public class User {
 
 	}
 
-	public User() {
-		
-	}
-
 	@Override
 	public String toString() {
 		return ("Username: " + username + "\nEmail: " + email + "\nPassword: " + password + "\nAccount type: "
@@ -129,7 +125,8 @@ public class User {
 			// if the input was invalid
 			if (!accountType.equals("y") && !accountType.equals("n")) {
 				while (!accountType.equals("y") && !accountType.equals("n")) {
-					System.out.print("Invalid input. Please enter 'y' if you are registering as a seller or 'n' for no.");
+					System.out
+							.print("Invalid input. Please enter 'y' if you are registering as a seller or 'n' for no.");
 					accountType = scanner.nextLine().toLowerCase().trim();
 				}
 			}
