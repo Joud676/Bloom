@@ -1,3 +1,5 @@
+package bloom.plantshop;
+
 import java.util.List;
 
 public class Plant {
