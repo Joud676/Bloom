@@ -54,6 +54,7 @@ class Seller extends User {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
+
 	@Override
 	public String toString() {
 
@@ -61,4 +62,5 @@ class Seller extends User {
 
 		return sellerData;
 
+}
 }

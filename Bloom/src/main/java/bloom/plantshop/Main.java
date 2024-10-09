@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+    	
         Scanner scanner = new Scanner(System.in);
         User user = User.register(); // Call the register method from the User class
 
@@ -14,7 +15,7 @@ public class Main {
             Seller seller = (Seller) user; // Assuming the user registered as a seller
 
             while (true) {
-                System.out.print("Do you want to add a new plant? (y/n): ");
+                System.out.println("Do you want to add a new plant? (y/n): ");
                 String response = scanner.nextLine().trim().toLowerCase();
 
                 if (!response.equals("y")) {
