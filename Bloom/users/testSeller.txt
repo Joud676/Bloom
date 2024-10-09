@@ -1,5 +1,0 @@
-Username: testSeller
-Email: test@example.com
-Password: Password123!
-Account type: Seller
-Store name: Test Store
