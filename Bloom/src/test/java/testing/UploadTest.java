@@ -88,7 +88,7 @@ class UploadTest {
 		List<String> fertilization = Arrays.asList("Fertilizer A", "Fertilizer B");
 		Plant plant = new Plant(1, "Rose", "Beautiful and fragrant", "Water daily", 15.0, 10, fertilization);
 
-		String expectedString = "\nPlant ID: 1\n" + "Name: Rose\n" + "Characteristics: Beautiful and fragrant\n"
+		String expectedString = "Plant ID: 1\n" + "Name: Rose\n" + "Characteristics: Beautiful and fragrant\n"
 				+ "Care Information: Water daily\n" + "Price: 15.0\n" + "Quantity: 10\n"
 				+ "Fertilization: Fertilizer A, Fertilizer B";
 
