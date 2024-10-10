@@ -1,7 +1,7 @@
 package testing;
 
 import static org.junit.jupiter.api.Assertions.*;
-import bloom.plantshop.*;
+import bloom.plantshop.User;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

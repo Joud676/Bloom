@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class Seller extends User {
+public class Seller extends User {
 	private String storeName;
 	private List<Plant> plants = new ArrayList<>();
 
@@ -38,7 +38,7 @@ class Seller extends User {
 			String sellerFileName = "users/" + getUsername() + ".txt";
 			try (FileWriter writer = new FileWriter(sellerFileName, true)) {
 				writer.write(plant.toString() + System.lineSeparator());
-				System.out.println("Plant " + plant.getName() + " details have been saved to your file.");
+				System.out.println("Plant " + plant.getName() + "Details have been saved to your file.");
 			} catch (IOException e) {
 				System.out.println("Error saving plant details to seller's file: " + e.getMessage());
 			}
