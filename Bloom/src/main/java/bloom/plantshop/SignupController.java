@@ -117,7 +117,7 @@ public class SignupController {
     }
 
     private void saveCustomerToDatabase(String username, String email, String password) {
-        String insertCustomerSQL = "INSERT INTO customers (customerName, email, password, accountType) VALUES (?, ?, ?, ?)";
+        String insertCustomerSQL = "INSERT INTO customer (customerName, email, password, accountType) VALUES (?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement statement = connection.prepareStatement(insertCustomerSQL)) {
 
