@@ -1,11 +1,17 @@
 package bloom.plantshop;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.sql.Connection;
@@ -22,11 +28,13 @@ public class SignupController {
     @FXML
     private TextField emailText;
     @FXML
-    private TextField passwordText;
+    private PasswordField passwordText;
     @FXML
     private ComboBox<String> accountType;
     @FXML
     private Button signup;
+    @FXML
+    private Text login;
 
     // Database connection details
     private final String DB_URL = "jdbc:mysql://localhost:3306/bloom";
@@ -56,13 +64,56 @@ public class SignupController {
 
                 Optional<String> storeNameResult = dialog.showAndWait();
                 storeNameResult.ifPresent(storeName -> saveSellerToDatabase(username, email, password, storeName));
-
+                loadSellerHomePage();
             } else if ("Customer".equals(accountTypeSelection)) {
                 saveCustomerToDatabase(username, email, password);
+                loadCustomerHomePage();
             }
         }
     }
 
+    @FXML
+    private void login() {
+        try {
+            Parent loginRoot = FXMLLoader.load(getClass().getResource("login.fxml"));
+
+            Stage stage = (Stage) nameText.getScene().getWindow(); 
+            stage.setScene(new Scene(loginRoot));
+            stage.setTitle("Login"); 
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the login interface.");
+        }
+    }
+
+    private void loadSellerHomePage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SellerHomePage.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) signup.getScene().getWindow(); // Get the current stage
+            stage.setScene(new Scene(root));
+            stage.setTitle("Seller Home Page");
+            stage.show();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Loading Failed", "Error loading Seller Home Page: " + e.getMessage());
+        }
+    }
+    
+    private void loadCustomerHomePage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerHomePage.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) signup.getScene().getWindow(); // Get the current stage
+            stage.setScene(new Scene(root));
+            stage.setTitle("Customer Home Page");
+            stage.show();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Loading Failed", "Error loading Customer Home Page: " + e.getMessage());
+        }
+    }
+    
     private boolean validateInputs(String username, String email, String password, String accountTypeSelection) {
         // Check if any fields are empty
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || accountTypeSelection == null) {
