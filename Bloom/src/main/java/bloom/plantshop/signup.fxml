@@ -12,12 +12,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="294.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bloom.plantshop.SignupController">
    <children>
-      <ImageView fitHeight="138.0" fitWidth="120.0" layoutX="88.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="138.0" fitWidth="120.0" layoutX="88.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Bloom Logo.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="signup" layoutX="86.0" layoutY="375.0" mnemonicParsing="false" onAction="#signup" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: #607f41;" text="Sign Up" textFill="WHITE">
+      <Button fx:id="signup" layoutX="105.0" layoutY="373.0" mnemonicParsing="false" onAction="#signup" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #607f41; -fx-cursor: hand;" text="Sign Up" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -32,34 +32,39 @@
             <Image url="@Home Indicator.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nameText" layoutX="40.0" layoutY="146.0" prefHeight="27.0" prefWidth="214.0" promptText="Name" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />
-      <TextField fx:id="emailText" layoutX="41.0" layoutY="205.0" prefHeight="27.0" prefWidth="214.0" promptText="Email" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />
-      <Text fx:id="nameLabel" fill="#607f41" layoutX="39.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+      <TextField fx:id="nameText" layoutX="40.0" layoutY="145.0" prefHeight="27.0" prefWidth="214.0" promptText="Name" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />
+      <TextField fx:id="emailText" layoutX="40.0" layoutY="205.0" prefHeight="27.0" prefWidth="214.0" promptText="Email" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />
+      <Text fx:id="nameLabel" fill="#607f41" layoutX="45.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="emailLabel" fill="#607f41" layoutX="45.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Address">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="passwordLabel" fill="#607f41" layoutX="45.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="71.49609375">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="accountType" layoutX="40.0" layoutY="325.0" prefHeight="26.0" prefWidth="214.0" promptText="Choose Account Type" style="-fx-background-color: white; -fx-border-color: #607f41; -fx-border-radius: 10; -fx-background-radius: 5;" visibleRowCount="2" />
+      <Text fx:id="accountTypeLabel" fill="#607f41" layoutX="45.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Type">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <PasswordField fx:id="passwordText" layoutX="40.0" layoutY="265.0" prefHeight="27.0" prefWidth="214.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41;" />
+      <Text fx:id="login" fill="#656565" layoutX="89.0" layoutY="437.0" onMouseClicked="#login" strokeType="OUTSIDE" strokeWidth="0.0" text="Already Have an Account?">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Button fx:id="back2login" layoutX="121.0" layoutY="439.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: white; -fx-cursor: hand;" text="Log In" textFill="#607f41">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-      </Text>
-      <Text fx:id="emailLabel" fill="#607f41" layoutX="38.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Address">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <Text fx:id="passwordLabel" fill="#607f41" layoutX="38.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="53.49609375">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <ComboBox fx:id="accountType" layoutX="39.0" layoutY="322.0" prefHeight="26.0" prefWidth="214.0" promptText="Choose Account Type" style="-fx-background-color: white; -fx-border-color: #607f41; -fx-border-radius: 10; -fx-background-radius: 5;" visibleRowCount="2" />
-      <Text fx:id="accountTypeLabel" fill="#607f41" layoutX="39.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Type">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <PasswordField fx:id="passwordText" layoutX="39.0" layoutY="260.0" prefHeight="27.0" prefWidth="214.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41;" />
-      <Text fx:id="login" fill="#607f41" layoutX="55.0" layoutY="441.0" onMouseClicked="#login" strokeType="OUTSIDE" strokeWidth="0.0" text="Already Have an Account? Log In">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
+      </Button>
    </children>
 </AnchorPane>

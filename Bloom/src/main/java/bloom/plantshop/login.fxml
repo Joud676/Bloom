@@ -18,7 +18,7 @@
             <Image url="@Bloom Logo.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="Login" layoutX="83.0" layoutY="318.0" mnemonicParsing="false" onAction="#login" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: #607f41;" text="Login" textFill="WHITE">
+      <Button fx:id="Login" layoutX="101.0" layoutY="306.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #607f41; -fx-cursor: hand;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -28,27 +28,26 @@
             <Image url="@Status bar.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Home Indicator.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="usernameText" layoutX="36.0" layoutY="169.0" prefHeight="27.0" prefWidth="214.0" promptText="Name" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41;" />
-      <Text fx:id="usernameLabel" fill="#607f41" layoutX="36.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+      <TextField fx:id="usernameText" layoutX="40.0" layoutY="172.0" prefHeight="27.0" prefWidth="214.0" promptText="Name" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41;" />
+      <Text fx:id="usernameLabel" fill="#607f41" layoutX="45.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="passwordLabel" fill="#607f41" layoutX="37.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="53.49609375">
+      <Text fx:id="passwordLabel" fill="#607f41" layoutX="45.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="65.830078125">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <PasswordField fx:id="passwordText" layoutX="36.0" layoutY="250.0" prefHeight="27.0" prefWidth="214.0" promptText="Password" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />
-      <Text fx:id="signupLabel" fill="#607f41" layoutX="41.0" layoutY="381.0" onMouseClicked="#signup" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an Account? Signup Here!">
+      <PasswordField fx:id="passwordText" layoutX="40.0" layoutY="241.0" prefHeight="27.0" prefWidth="214.0" promptText="Password" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />
+      <Text fx:id="signupLabel" fill="#656565" layoutX="89.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an Account?" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font size="11.0" />
          </font>
       </Text>
+      <Button fx:id="back2signup" layoutX="117.0" layoutY="440.0" mnemonicParsing="false" onAction="#signup" style="-fx-background-color: white; -fx-cursor: hand;" text="Sign Up" textFill="#607f41">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>
