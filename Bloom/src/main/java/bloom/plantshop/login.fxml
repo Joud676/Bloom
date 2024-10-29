@@ -57,7 +57,7 @@
             <Font size="11.0" />
          </font>
       </Text>
-      <Button layoutX="113.0" layoutY="383.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign Up" textAlignment="CENTER" textFill="#607f41">
+      <Button fx:id="back2signup" layoutX="113.0" layoutY="383.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign Up" textAlignment="CENTER" textFill="#607f41">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
