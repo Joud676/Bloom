@@ -36,7 +36,7 @@
       <TextField fx:id="emailText" layoutX="41.0" layoutY="205.0" prefHeight="27.0" prefWidth="214.0" promptText="Email" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />
       <Text fx:id="nameLabel" fill="#607f41" layoutX="39.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Text>
       <Text fx:id="emailLabel" fill="#607f41" layoutX="38.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Address">
