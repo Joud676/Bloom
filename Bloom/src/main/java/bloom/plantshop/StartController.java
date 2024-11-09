@@ -33,4 +33,9 @@ public class StartController {
             // Handle the exception (e.g., show an error dialog)
         }
     }
+    @FXML
+    public void exit() {
+        System.exit(0);
+
+    }
 }

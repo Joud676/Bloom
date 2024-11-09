@@ -22,7 +22,7 @@ public class loginController {
 
     @FXML
     private Text signupLabel;
-    
+
     @FXML
     private Text passwordLabel;
 
@@ -34,6 +34,9 @@ public class loginController {
 
     @FXML
     private TextField usernameText;
+    
+    @FXML
+    private Button back2signup;
 
     private final String DB_URL = "jdbc:mysql://localhost:3306/bloom";
     private final String DB_USER = "root";
@@ -58,7 +61,7 @@ public class loginController {
         try {
             Parent signupRoot = FXMLLoader.load(getClass().getResource("signup.fxml"));
 
-            Stage stage = (Stage) usernameText.getScene().getWindow(); 
+            Stage stage = (Stage) back2signup.getScene().getWindow(); 
             stage.setScene(new Scene(signupRoot));
             stage.setTitle("Signup"); 
         } catch (Exception e) {
@@ -68,8 +71,8 @@ public class loginController {
     }
 
     private String authenticateUser(String username, String password) {
-        String querySeller = "SELECT * FROM seller WHERE sellerName = ? AND password = ?";
-        String queryCustomer = "SELECT * FROM customer WHERE customerName = ? AND password = ?";
+        String querySeller = "SELECT sellerId FROM seller WHERE sellerName = ? AND password = ?";
+        String queryCustomer = "SELECT customerId FROM customer WHERE customerName = ? AND password = ?";
 
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement statementSeller = connection.prepareStatement(querySeller);
@@ -81,7 +84,9 @@ public class loginController {
             ResultSet resultSetSeller = statementSeller.executeQuery();
 
             if (resultSetSeller.next()) {
-                return "seller"; // User is a seller
+                int sellerId = resultSetSeller.getInt("sellerId");
+                UserId.setSellerId(sellerId); // Store the sellerId in the UserId class
+                return "seller"; 
             }
 
             // Check in customer table
@@ -90,7 +95,9 @@ public class loginController {
             ResultSet resultSetCustomer = statementCustomer.executeQuery();
 
             if (resultSetCustomer.next()) {
-                return "customer"; // User is a customer
+                int customerId = resultSetCustomer.getInt("customerId");
+                UserId.setCustomerId(customerId); // Store the customerId in the UserId class
+                return "customer"; 
             }
 
         } catch (SQLException e) {
@@ -99,8 +106,6 @@ public class loginController {
         return null; // User not found
     }
 
-   
-    
     private void navigateToHomePage(String userType) {
         try {
             Stage stage = (Stage) Login.getScene().getWindow();
@@ -123,5 +128,9 @@ public class loginController {
         alert.showAndWait();
     }
     
-   
+    @FXML
+    public void exit() {
+        System.exit(0);
+
+    }
 }

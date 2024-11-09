@@ -17,8 +17,18 @@ public class Starting2Controller {
 
     // Event Listener on Button[#login].onAction
     @FXML
-    public void login(ActionEvent event) {
-        // TODO: Implement login logic here
+    void handleLoginButtonAction(ActionEvent event) {
+        try {
+            // Load the login FXML
+            Parent loginRoot = FXMLLoader.load(getClass().getResource("login.fxml"));
+            // Get the current stage
+            Stage stage = (Stage) login.getScene().getWindow();
+            // Set the new scene
+            stage.setScene(new Scene(loginRoot));
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Optionally, handle the error (e.g., show an alert)
+        }
     }
 
     // Event Listener on Button[#signup].onAction
@@ -37,5 +47,10 @@ public class Starting2Controller {
             e.printStackTrace();
             // You can handle the exception, e.g., show an alert dialog
         }
+    }
+    @FXML
+    public void exit() {
+        System.exit(0);
+
     }
 }
