@@ -38,9 +38,9 @@ public class loginController {
     @FXML
     private Button back2signup;
 
-    private final String DB_URL = "jdbc:mysql://localhost:3306/bloom";
-    private final String DB_USER = "root";
-    private final String DB_PASSWORD = "Admin@1234";
+    private final String DB_URL = "jdbc:mysql://192.168.0.10:3306/bloom"; 
+    private final String DB_USER = "BloomAdmin"; 
+    private final String DB_PASSWORD = "Bloom@1234"; 
 
     @FXML
     void login(ActionEvent event) {
@@ -86,7 +86,7 @@ public class loginController {
             if (resultSetSeller.next()) {
                 int sellerId = resultSetSeller.getInt("sellerId");
                 UserId.setSellerId(sellerId); // Store the sellerId in the UserId class
-                return "seller"; // User is a seller
+                return "seller"; 
             }
 
             // Check in customer table
@@ -97,7 +97,7 @@ public class loginController {
             if (resultSetCustomer.next()) {
                 int customerId = resultSetCustomer.getInt("customerId");
                 UserId.setCustomerId(customerId); // Store the customerId in the UserId class
-                return "customer"; // User is a customer
+                return "customer"; 
             }
 
         } catch (SQLException e) {
@@ -126,5 +126,11 @@ public class loginController {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    
+    @FXML
+    public void exit() {
+        System.exit(0);
+
     }
 }

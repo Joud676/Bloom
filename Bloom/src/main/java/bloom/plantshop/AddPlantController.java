@@ -1,6 +1,9 @@
 package bloom.plantshop;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -10,11 +13,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,6 +39,8 @@ public class AddPlantController {
 	@FXML
 	private Button importButton;
 
+	@FXML 
+	private Button back;
 	private File selectedImageFile;
 
 	private  FileChooser fileChooser;
@@ -53,7 +58,6 @@ public class AddPlantController {
 	    selectedImageFile = fileChooser.showOpenDialog(new Stage());
 
 	    if (selectedImageFile != null) {
-	        System.out.println("Selected Image: " + selectedImageFile.getAbsolutePath());
 	        Image image = new Image(selectedImageFile.toURI().toString(), 100,1500, true, true);
 	        importedImage.setPreserveRatio(true);
 	        importedImage.setImage(image);
@@ -71,7 +75,6 @@ public class AddPlantController {
 	    double price;
 	    int quantity;
 
-	    // Parse price and quantity with exception handling
 	    try {
 	        price = Double.parseDouble(priceText.getText());
 	        quantity = Integer.parseInt(quantityText.getText());
@@ -98,9 +101,10 @@ public class AddPlantController {
 	                statement.setBinaryStream(7, fis, (int) selectedImageFile.length());
 	                int rowsAffected = statement.executeUpdate();
 	                if (rowsAffected > 0) {
-	                    System.out.println("Plant successfully added to the database.");
+	    	            showAlert(Alert.AlertType.INFORMATION, "Success", "Plant Added Successfully!");
 	                } else {
-	                    System.out.println("Failed to add plant to the database.");
+	    	            showAlert(AlertType.ERROR, "Insert Failed", "Failed to add plant to the database.");
+
 	                }
 	            } catch (SQLException e) {
 	                showAlert(AlertType.ERROR, "SQL Exception", "Error executing SQL statement: " + e.getMessage());
@@ -110,13 +114,6 @@ public class AddPlantController {
 	            statement.setNull(7, java.sql.Types.BLOB);
 	        }
 
-	        int rowsAffected = statement.executeUpdate();
-
-	        if (rowsAffected > 0) {
-	            showAlert(Alert.AlertType.INFORMATION, "Success", "Plant Added Successfully!");
-	        } else {
-	            showAlert(AlertType.ERROR, "Insert Failed", "No rows were inserted.");
-	        }
 	    } catch (SQLException e) {
 	        showAlert(AlertType.ERROR, "Database Error", "Error Adding Plant: " + e.getMessage());
 	        e.printStackTrace(); // Log the stack trace for debugging
@@ -130,4 +127,26 @@ public class AddPlantController {
 	    alert.setHeaderText(null);
 	    alert.setContentText(message);
 	    alert.showAndWait();
-	}}
+	}
+	 @FXML
+	    public void exit() {
+	        System.exit(0);
+
+	    }
+	  @FXML
+	    void onClick_button() {
+	        try {
+	            FXMLLoader loader = new FXMLLoader(getClass().getResource("SellerHomePage.fxml"));
+	            Parent root = loader.load();
+
+	            Stage currentStage = (Stage) back.getScene().getWindow();
+
+	            Scene newScene = new Scene(root);
+	            currentStage.setScene(newScene);
+	            currentStage.show();
+	        } catch (Exception e) {
+	            e.printStackTrace(); 
+	        }
+	    }
+	 
+	 }

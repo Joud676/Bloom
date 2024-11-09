@@ -48,4 +48,9 @@ public class Starting2Controller {
             // You can handle the exception, e.g., show an alert dialog
         }
     }
+    @FXML
+    public void exit() {
+        System.exit(0);
+
+    }
 }

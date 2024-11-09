@@ -14,13 +14,13 @@
          </image>
       </ImageView>
       
-      <Button fx:id="login" layoutX="87.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="41.0" prefWidth="120.0" style="-fx-background-color: #607f41;" text="Log In" textFill="WHITE">
+      <Button fx:id="login" layoutX="87.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="41.0" prefWidth="120.0" style="-fx-background-color: #607f41; -fx-cursor: hand;" text="Log In" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
       
-      <Button fx:id="signup" layoutX="87.0" layoutY="342.0" mnemonicParsing="false" onAction="#signup" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: #607f41;" text="Sign Up" textFill="WHITE">
+      <Button fx:id="signup" layoutX="87.0" layoutY="342.0" mnemonicParsing="false" onAction="#signup" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: #607f41; -fx-cursor: hand;" text="Sign Up" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -32,7 +32,7 @@
          </image>
       </ImageView>
       
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="476.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Home Indicator.png" />
          </image>

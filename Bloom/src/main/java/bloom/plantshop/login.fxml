@@ -28,7 +28,12 @@
             <Image url="@Status bar.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameText" layoutX="40.0" layoutY="172.0" prefHeight="27.0" prefWidth="214.0" promptText="Name" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41;" />
+       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="476.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Home Indicator.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameText" layoutX="40.0" layoutY="172.0" prefHeight="27.0" prefWidth="214.0" promptText="Name" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />
       <Text fx:id="usernameLabel" fill="#607f41" layoutX="45.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
             <Font name="System Bold" size="14.0" />
