@@ -47,7 +47,7 @@ public class AddPlantController {
 	// Database connection details
 	private final String DB_URL = "jdbc:mysql://localhost:3306/bloom";
 	private final String DB_USER = "root";
-	private final String DB_PASSWORD = "Admin@1234";
+	private final String DB_PASSWORD = "100398";
 
 	// Method to handle importing the image
 	@FXML

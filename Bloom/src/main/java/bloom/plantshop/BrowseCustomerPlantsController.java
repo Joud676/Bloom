@@ -73,7 +73,7 @@ public class BrowseCustomerPlantsController {
 
     private static final String URL = "jdbc:mysql://localhost:3306/bloom";
     private static final String USER = "root";
-    private static final String PASSWORD = "Admin@1234";
+    private static final String PASSWORD = "100398";
 
     @FXML
     public void initialize() {
