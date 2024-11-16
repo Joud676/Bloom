@@ -35,6 +35,13 @@ public class Plant {
 		        this.fertilization = fertilization2;
 		
 		}
+		// constructor for browsing 
+		public Plant(byte[] browse_image, String browse_name, String browse_characteristic, double browse_price) {
+			this.image = browse_image;
+		        this.name = browse_name;
+		        this.characteristic = browse_characteristic;
+		        this.price = browse_price;
+		}
 
 		public void setPlantId(int plantId) {
 			this.plantId = plantId;
