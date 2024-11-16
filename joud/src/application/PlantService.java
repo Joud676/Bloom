@@ -6,9 +6,9 @@ import java.util.List;
 
 public class PlantService {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad"; 
+    private static final String DB_URL = "jdbc:mysql://localhost:3306"; 
     private static final String DB_USER = "root"; 
-    private static final String DB_PASSWORD = "Rr120178593!";
+    private static final String DB_PASSWORD = "100398";
 
     public static List<Plant> getPlantsForCustomer(int customerId) {
         List<Plant> plants = new ArrayList<>();

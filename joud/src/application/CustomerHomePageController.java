@@ -46,9 +46,9 @@ public class CustomerHomePageController {
 
 		}
 	
-    private final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad";
+    private final String DB_URL = "jdbc:mysql://localhost:3306";
     private final String DB_USER = "root";
-    private final String DB_PASSWORD = "Rr120178593!";
+    private final String DB_PASSWORD = "100398";
 
     @FXML
     private Button Home_button;

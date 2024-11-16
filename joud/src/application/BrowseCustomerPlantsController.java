@@ -46,9 +46,9 @@ public class BrowseCustomerPlantsController {
 	Connection connection;
 	ResultSet resultSet;
 	PreparedStatement statement;
-	private static final String URL = "jdbc:mysql://localhost:3306/local_bloom_ranad";
+	private static final String URL = "jdbc:mysql://localhost:3306";
 	private static final String USER = "root";
-	private static final String PASSWORD = "Rr120178593!";
+	private static final String PASSWORD = "100398";
 
 	@FXML
 	public void initialize() {
