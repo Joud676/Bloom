@@ -26,20 +26,34 @@ import com.mysql.cj.jdbc.DatabaseMetaData;
 
 public class BrowseCustomerPlantsController {
 
-	@FXML
-	private Button back;
+	  @FXML
+	    private Button back;
 
-	@FXML
-	private Button checkoutBtn;
+	    @FXML
+	    private GridPane browseGrid;
 
-	@FXML
-	private Button searchButton;
+	    @FXML
+	    private Button checkoutBtn;
 
-	@FXML
-	private TextField searchTextField;
+	    @FXML
+	    private Button searchButton;
 
-	@FXML
-	private GridPane browseGrid;
+	    @FXML
+	    private TextField searchTextField;
+
+	    @FXML
+	    void checkoutAction(ActionEvent event) {
+
+	    }
+
+	    @FXML
+	    void onClick_button(ActionEvent event) {
+
+	    }
+
+	    @FXML
+	    void searchPlant(ActionEvent event) {
+	    }
 
 	private ObservableList<Plant> cardListData;
 

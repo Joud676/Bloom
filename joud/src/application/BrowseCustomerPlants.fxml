@@ -4,12 +4,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -30,7 +33,7 @@
                            </HBox.margin></Button>
 								<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="202.0" text="Plant Market" textAlignment="CENTER" textFill="WHITE">
 									<font>
-										<Font name="Cambria Bold" size="15.0" />
+										<Font name="Calibri Bold" size="16.0" />
 									</font>
                            <HBox.margin>
                               <Insets />
@@ -52,19 +55,22 @@
 						</HBox>
 						<HBox prefHeight="53.0" prefWidth="254.0">
 							<children>
-								<HBox alignment="CENTER" prefHeight="53.0" prefWidth="158.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13); -fx-background-radius: 10;" styleClass="free-delivery-card" stylesheets="@../../../bin/bloom/plantshop/style.css">
+								<HBox alignment="CENTER" prefHeight="54.0" prefWidth="165.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13); -fx-background-radius: 10;" styleClass="free-delivery-card" stylesheets="@../../../bin/bloom/plantshop/style.css">
 									<children>
 										<VBox alignment="CENTER" prefHeight="69.0" prefWidth="115.0" styleClass="free-delivery-card" stylesheets="@../../../bin/bloom/plantshop/style.css">
 											<children>
 												<Label text="Free delivery" textFill="WHITE">
 													<font>
-														<Font name="Cambria Bold" size="12.0" />
+														<Font name="Verdana Bold" size="10.0" />
 													</font>
 												</Label>
 												<Label text="over 99 sr order" textFill="WHITE">
 													<font>
-														<Font name="Cambria" size="10.0" />
+														<Font name="Verdana Pro" size="9.0" />
 													</font>
+                                       <VBox.margin>
+                                          <Insets top="3.0" />
+                                       </VBox.margin>
 												</Label>
 											</children>
 										</VBox>
@@ -77,19 +83,22 @@
 								</HBox>
 								
 								<Pane prefHeight="51.0" prefWidth="50.0" stylesheets="@../../../bin/bloom/plantshop/style.css" HBox.hgrow="ALWAYS" />
-								<HBox alignment="CENTER" prefHeight="73.0" prefWidth="163.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13); -fx-background-radius: 10;" styleClass="free-delivery-card" stylesheets="@../../../bin/bloom/plantshop/style.css">
+								<HBox alignment="CENTER" prefHeight="54.0" prefWidth="165.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13); -fx-background-radius: 10;" styleClass="free-delivery-card" stylesheets="@../../../bin/bloom/plantshop/style.css">
 									<children>
 										<VBox alignment="CENTER" prefHeight="67.0" prefWidth="107.0">
 											<children>
-												<Label prefHeight="16.0" prefWidth="90.0" text="Shopping online" textFill="WHITE">
+												<Label prefHeight="16.0" prefWidth="95.0" text="Shopping online" textFill="WHITE">
 													<font>
-														<Font name="Cambria Bold" size="12.0" />
+														<Font name="Verdana Bold" size="10.0" />
 													</font>
 												</Label>
-												<Label prefHeight="13.0" prefWidth="86.0" text="deliver in same day " textFill="WHITE">
+												<Label prefHeight="14.0" prefWidth="92.0" text="same day delivery" textFill="WHITE">
 													<font>
-														<Font name="Cambria" size="10.0" />
+														<Font name="Verdana Pro" size="9.0" />
 													</font>
+                                       <VBox.margin>
+                                          <Insets top="3.0" />
+                                       </VBox.margin>
 												</Label>
 											</children>
 										</VBox>
@@ -114,24 +123,20 @@
 								<Insets left="30.0" right="30.0" />
 							</VBox.margin>
 							<children>
-								<TextField fx:id="searchTextField" prefHeight="25.0" prefWidth="159.0" promptText=" search for plant here" stylesheets="@../../../bin/bloom/plantshop/style.css">
+								<TextField fx:id="searchTextField" prefHeight="25.0" prefWidth="159.0" promptText=" search for plant here" styleClass="secarch-box" stylesheets="@style%20(1).css">
 									<HBox.margin>
 										<Insets left="20.0" />
 									</HBox.margin>
 									<font>
 										<Font size="10.0" />
 									</font>
-									<styleClass>
-										<String fx:value="transparent" />
-										<String fx:value="secarch-box" />
-									</styleClass>
 								</TextField>
-								<Button fx:id="searchButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#searchPlant" prefHeight="26.0" prefWidth="57.0" styleClass="secarch-button" stylesheets="@../../../bin/bloom/plantshop/style.css" text="search" textFill="#607f41">
+								<Button fx:id="searchButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#searchPlant" prefHeight="25.0" prefWidth="57.0" style="-fx-cursor: hand;" styleClass="secarch-button" stylesheets="@../../../bin/bloom/plantshop/style.css" text="search" textFill="#607f41">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font name="Verdana Bold" size="10.0" />
                            </font></Button>
 							</children>
 							<styleClass>
@@ -140,15 +145,32 @@
 							</styleClass>
 						</HBox>
 						<Separator prefHeight="14.0" prefWidth="294.0" />
+                  <AnchorPane prefHeight="294.0" prefWidth="294.0">
+                     <children>
+                        <AnchorPane layoutX="14.0" layoutY="-4.8" prefHeight="299.0" prefWidth="293.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ScrollPane layoutX="46.0" layoutY="24.0" prefHeight="298.4" prefWidth="292.79999999999995" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <GridPane fx:id="browseGrid" prefHeight="30.0" prefWidth="292.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                    </GridPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
 					</children>
 				</VBox>
 			</center>
 			<top>
-				<Pane prefHeight="29.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" BorderPane.alignment="CENTER">
+				<Pane prefHeight="30.0" prefWidth="338.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" BorderPane.alignment="CENTER">
 					<children>
-						<ImageView fitHeight="32.0" fitWidth="303.0" layoutX="-6.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="32.0" fitWidth="313.0" layoutX="-6.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Bloom/src/main/java/bloom/plantshop/Status%20bar.png" />
+								<Image url="@Status%20bar.png" />
 							</image>
 						</ImageView>
 					</children>
@@ -157,9 +179,9 @@
 			<bottom>
 				<Pane prefHeight="22.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" stylesheets="@../../../bin/bloom/plantshop/style.css" BorderPane.alignment="CENTER">
 					<children>
-						<ImageView fitHeight="36.0" fitWidth="164.0" layoutX="65.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="15.0" fitWidth="186.0" layoutX="59.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Bloom/src/main/java/bloom/plantshop/Home%20Indicator.png" />
+								<Image url="@Home%20Indicator.png" />
 							</image>
 						</ImageView>
 					</children>

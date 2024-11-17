@@ -1,3 +1,5 @@
+package application;
+
 import java.awt.Label;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
