@@ -38,7 +38,7 @@ public class loginController {
     @FXML
     private Button back2signup;
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad"; 
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/bloom"; 
     private static final String DB_USER = "root"; 
     private static final String DB_PASSWORD = "Rr120178593!";
     

@@ -71,7 +71,7 @@ public class BrowseCustomerPlantsController {
     private String[] plantCharacteristics = new String[4];
 //new
 
-    private static final String URL = "jdbc:mysql://localhost:3306/local_bloom_ranad";
+    private static final String URL = "jdbc:mysql://localhost:3306/bloom";
     private static final String USER = "root";
     private static final String PASSWORD = "Rr120178593!";
 

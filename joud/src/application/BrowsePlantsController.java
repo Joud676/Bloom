@@ -71,7 +71,7 @@ public class BrowsePlantsController {
     private double[] plantPrices = new double[4];
     private String[] plantCharacteristics = new String[4];
 
-    private static final String URL = "jdbc:mysql://localhost:3306/local_bloom_ranad";
+    private static final String URL = "jdbc:mysql://localhost:3306/bloom";
     private static final String USER = "root";
     private static final String PASSWORD = "Rr120178593!";
 
@@ -199,27 +199,8 @@ public class BrowsePlantsController {
     
     @FXML
     void onClick_button() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SellerHomePage.fxml"));
-            Parent root = loader.load();
-            
-            // Get the CustomerHomePageController
-            CustomerHomePageController controller = loader.getController();
-            
-            // Set the customer ID and call loadPlantCards again
-            int customerId = UserId.getCustomerId();
-            System.out.print(customerId+"in the plant details");
-            controller.setCustomerId(customerId);
-
-            Stage currentStage = (Stage) back.getScene().getWindow();
-
-            Scene newScene = new Scene(root);
-            currentStage.setScene(newScene);
-
-            
-        } catch (Exception e) {
-            e.printStackTrace(); 
-        }
+        Stage stage = (Stage) back.getScene().getWindow();
+        Navigation.navigateTo("SellerHomePage.fxml", stage);
     }
 
     

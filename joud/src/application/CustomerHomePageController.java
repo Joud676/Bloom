@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -46,15 +47,12 @@ public class CustomerHomePageController {
 
 		}
 	
-    private final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad";
+    private final String DB_URL = "jdbc:mysql://localhost:3306/bloom";
     private final String DB_USER = "root";
     private final String DB_PASSWORD = "Rr120178593!";
 
     @FXML
     private Button Home_button;
-
-    @FXML
-    private Button back_Button1;
 
     @FXML
     private Button cart_button;
@@ -85,6 +83,12 @@ public class CustomerHomePageController {
 
     @FXML
     private VBox vboxContainer;
+    
+    @FXML
+    private ImageView profileImg;
+    
+    @FXML
+    private ImageView profile;
     
     public void loadPlantCards() {
         try {
@@ -182,12 +186,16 @@ public class CustomerHomePageController {
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error occurred while searching for the plant.", "Error", JOptionPane.ERROR_MESSAGE);
-        
-
-    }
+    }}
+    
+     @FXML  
+     void toProfile() {
+    	 Stage stage = (Stage) newPlant_Button.getScene().getWindow();
+         Navigation.navigateTo("CustomerProfile.fxml", stage);   
+     }
 
 }
-}
+
 
 
 
