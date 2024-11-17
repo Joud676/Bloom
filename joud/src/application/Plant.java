@@ -24,17 +24,15 @@ public class Plant {
 	        this.image = image;
 	    }
 // second constructor without image
-		public Plant(int plantId2, String name2, String characteristic2, String careInfo2, double price2, int quantity2,
-				List<String> fertilization2) {
-			 this.plantId = plantId2;
-		        this.name = name2;
-		        this.characteristic = characteristic2;
-		        this.careInfo = careInfo2;
-		        this.price = price2;
-		        this.quantity = quantity2;
-		        this.fertilization = fertilization2;
-		
-		}
+	 public Plant(int plantId, String name, String characteristic, String careInfo, double price, int quantity, List<String> fertilizationList) 
+	 { this.plantId = plantId; 
+	 this.name = name;
+	 this.characteristic = characteristic; 
+	 this.careInfo = careInfo; 
+	 this.price = price; 
+	 this.quantity = quantity; 
+	 this.fertilization = fertilizationList;
+	 }
 
 		public void setPlantId(int plantId) {
 			this.plantId = plantId;

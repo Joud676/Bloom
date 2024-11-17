@@ -12,51 +12,47 @@
 
 <AnchorPane prefHeight="499.0" prefWidth="294.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddPlantController">
    <children>
-      <Pane prefHeight="200.0" prefWidth="299.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);">
+      <Pane prefHeight="200.0" prefWidth="299.0" style="-fx-background-color: #5d8c50;">
          <children>
-            <ImageView fitHeight="82.0" fitWidth="78.0" layoutX="111.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Bloom Logo White.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="back" layoutX="14.0" layoutY="39.0" mnemonicParsing="false" onAction="#onClick_button" style="-fx-background-radius: 30;" text="&lt;-" />
+            <Button fx:id="back" layoutX="14.0" layoutY="39.0" mnemonicParsing="false" onAction="#onClick_button" style="-fx-background-radius: 15;" text="&lt;-" />
+            <Text fill="WHITE" layoutX="86.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add your Plant">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       
-      <ImageView fitHeight="35.0" fitWidth="300.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="300.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Status bar.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="238.0" layoutX="29.0" layoutY="474.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="13.0" fitWidth="238.0" layoutX="75.0" layoutY="485.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Home Indicator.png" />
          </image>
       </ImageView>
       <Pane layoutY="74.0" prefHeight="336.0" prefWidth="299.0" style="-fx-background-color: WHITE; -fx-background-radius: 40;">
          <children>
-            <Text fill="#344e19" layoutX="86.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add your Plant">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <TextArea fx:id="charText" layoutX="35.0" layoutY="84.0" prefHeight="76.0" prefWidth="229.0" promptText="Plant Characteristics" style="-fx-background-color: white; -fx-border-radius: 10; -fx-border-color: #607f41;" />
-            <TextField fx:id="nameText" layoutX="35.0" layoutY="49.0" prefHeight="27.0" prefWidth="229.0" promptText="Plant Name" style="-fx-background-color: white; -fx-border-color: #607f41; -fx-border-radius: 10;" />
-            <TextArea fx:id="careText" layoutX="35.0" layoutY="170.0" prefHeight="76.0" prefWidth="229.0" promptText="Care Information" style="-fx-background-color: white; -fx-border-radius: 10; -fx-border-color: #607f41;" />
-            <Button fx:id="importButton" layoutX="56.0" layoutY="270.0" mnemonicParsing="false" onAction="#importImage" prefHeight="25.0" prefWidth="183.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13); -fx-cursor: hand;" text="Import Image" textFill="WHITE">
+            <TextArea fx:id="charText" layoutX="17.0" layoutY="69.0" prefHeight="73.0" prefWidth="260.0" promptText="Plant Characteristics" style="-fx-background-color: white; -fx-border-radius: 10; -fx-border-color: #607f41;" />
+            <TextField fx:id="nameText" layoutX="19.0" layoutY="28.0" prefHeight="27.0" prefWidth="229.0" promptText="Plant Name" style="-fx-background-color: white; -fx-border-color: #607f41; -fx-border-radius: 10;" stylesheets="@style%20(1).css" />
+            <TextArea fx:id="careText" layoutX="16.0" layoutY="150.0" prefHeight="76.0" prefWidth="262.0" promptText="Care Information" style="-fx-background-color: white; -fx-border-radius: 10; -fx-border-color: #607f41;" />
+            <ImageView fx:id="importedImage" fitHeight="58.0" fitWidth="58.0" layoutX="166.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+            <TextArea fx:id="Fertilization_Text" layoutX="18.0" layoutY="238.0" prefHeight="22.0" prefWidth="229.0" promptText="Fertilization List" style="-fx-background-color: white; -fx-border-radius: 10; -fx-border-color: #607f41;" />
+            <Button fx:id="importButton" layoutX="40.0" layoutY="298.0" mnemonicParsing="false" onAction="#importImage" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: #557a4b; -fx-cursor: hand;" text="Import Image" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <ImageView fx:id="importedImage" fitHeight="58.0" fitWidth="58.0" layoutX="178.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField fx:id="quantityText" layoutX="47.0" layoutY="321.0" prefHeight="27.0" prefWidth="94.0" promptText="Quantity" style="-fx-background-color: white; -fx-border-color: #607f41; -fx-border-radius: 10;" />
          </children>
       </Pane>
-      <TextField fx:id="priceText" layoutX="164.0" layoutY="396.0" prefHeight="27.0" prefWidth="94.0" promptText="Price" style="-fx-background-color: white; -fx-border-color: #607f41; -fx-border-radius: 10;" />
-      <Button fx:id="addPlantButton" layoutX="103.0" layoutY="438.0" mnemonicParsing="false" onAction="#addPlant" prefHeight="35.0" prefWidth="87.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13); -fx-cursor: hand;" text="Add Plant" textFill="WHITE">
+      <Button fx:id="addPlantButton" layoutX="75.0" layoutY="460.0" mnemonicParsing="false" onAction="#addPlant" prefHeight="24.0" prefWidth="143.0" style="-fx-background-color: #557a4b; -fx-cursor: hand;" text="Add Plant" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <TextField fx:id="priceText" layoutX="147.0" layoutY="417.0" prefHeight="27.0" prefWidth="94.0" promptText="Price" style="-fx-background-color: white; -fx-border-color: #607f41; -fx-border-radius: 10;" />
+      <TextField fx:id="quantityText" layoutX="39.0" layoutY="417.0" prefHeight="27.0" prefWidth="94.0" promptText="Quantity" style="-fx-background-color: white; -fx-border-color: #607f41; -fx-border-radius: 10;" />
    </children>
 </AnchorPane>

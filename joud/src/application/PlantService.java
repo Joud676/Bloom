@@ -8,45 +8,31 @@ public class PlantService {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad"; 
     private static final String DB_USER = "root"; 
-    private static final String DB_PASSWORD = "Rr120178593!";
-
+    private static final String DB_PASSWORD = "Rr120178593!"; 
     public static List<Plant> getPlantsForCustomer(int customerId) {
-        List<Plant> plants = new ArrayList<>();
+    	List<Plant> plants = new ArrayList<>(); 
+    	String query = "SELECT p.plantId, p.plantName, p.characteristics, p.careInfo, p.price, p.quantity, p.image, " 
+    	+ "p.fertilization_list " + "FROM plant p " + "INNER JOIN plantcollection pc ON p.plantId = pc.plantId " 
+    			+ "WHERE pc.customerId = ? " + "GROUP BY p.plantId"; 
+    	try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+    			PreparedStatement statement = connection.prepareStatement(query)) {
+    		statement.setInt(1, customerId); 
+    		try (ResultSet resultSet = statement.executeQuery()) { 
+    			while (resultSet.next()) { 
+    				int plantId = resultSet.getInt("plantId");
+    			String name = resultSet.getString("plantName"); 
+    			String characteristic = resultSet.getString("characteristics"); 
+    			String careInfo = resultSet.getString("careInfo");
+    			double price = resultSet.getDouble("price"); 
+    			int quantity = resultSet.getInt("quantity"); 
+    			String fertilizationStr = resultSet.getString("fertilization_list");
+    			List<String> fertilization = fertilizationStr != null ? Arrays.asList(fertilizationStr.split(",")) : new ArrayList<>(); 
+    			byte[] image = resultSet.getBytes("image"); 
+    			Plant plant = new Plant(plantId, name, characteristic, careInfo, price, quantity, fertilization, image);
+    			plants.add(plant); } } } catch (SQLException e) { e.printStackTrace(); 
+    			} 
+    	return plants;
 
-        String query = "SELECT p.plantId, p.plantName, p.characteristics, p.careInfo, p.price, p.quantity, p.image, " +
-                       "GROUP_CONCAT(f.fertilization) AS fertilization " +
-                       "FROM plant p " +
-                       "INNER JOIN plantcollection pc ON p.plantId = pc.plantId " +
-                       "LEFT JOIN fertilization f ON p.plantId = f.plantId " +
-                       "WHERE pc.customerId = ? " +
-                       "GROUP BY p.plantId";
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setInt(1, customerId);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    int plantId = resultSet.getInt("plantId");
-                    String name = resultSet.getString("plantName");
-                    String characteristic = resultSet.getString("characteristics");
-                    String careInfo = resultSet.getString("careInfo");
-                    double price = resultSet.getDouble("price");
-                    int quantity = resultSet.getInt("quantity");
-                    String fertilizationStr = resultSet.getString("fertilization");
-                    List<String> fertilization = fertilizationStr != null ? Arrays.asList(fertilizationStr.split(",")) : new ArrayList<>();
-                    byte[] image = resultSet.getBytes("image");
-
-                    Plant plant = new Plant(plantId, name, characteristic, careInfo, price, quantity, fertilization, image);
-                    plants.add(plant);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return plants;
     }
 
 }

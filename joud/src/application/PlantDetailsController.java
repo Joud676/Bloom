@@ -40,45 +40,38 @@ public class PlantDetailsController {
 
     @FXML
     private ImageView plantImage;
-
-    // Method to set and display plant data
-    public void setPlantData(Plant plant) {
-        PlantName.setText(plant.getName()); // Example for care info
-       infoText.setText(plant.getCharacteristic()); 
-       careText.setText(plant.getCareInfo());
-
-        // Set the image
-        byte[] imageBytes = plant.getImage();
-        ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
-        Image image = new Image(bis);
-        plantImage.setImage(image);
-    }
-
-    @FXML
-    void checkFertilization(ActionEvent event) {
-        // Logic for checking fertilization
-    }
-
-    @FXML
-    void onClick_button(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerHomePage.fxml"));
-            Parent root = loader.load();
-
-            // Get the CustomerHomePageController
-            CustomerHomePageController controller = loader.getController();
-
-            // Set the customer ID and call loadPlantCards again
-            int customerId = UserId.getCustomerId();
-            System.out.print(customerId + " in the plant details");
-            controller.setCustomerId(customerId);
-
-            // Get the current stage and set the scene
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private Plant currentPlant; // Hold the current plant data 
+    public void setPlantData(Plant plant) { 
+    	this.currentPlant = plant; // Save the plant object 
+    	PlantName.setText(plant.getName());
+    	infoText.setText(plant.getCharacteristic()); 
+    	careText.setText(plant.getCareInfo()); 
+    	byte[] imageBytes = plant.getImage();
+    	ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes); 
+    	Image image = new Image(bis); plantImage.setImage(image);
+    	} 
+    @FXML 
+    void move_to_Fertilization(ActionEvent event) { 
+    	try { FXMLLoader loader = new FXMLLoader(getClass().getResource("FertilizationPage.fxml")); 
+    	Parent root = loader.load(); 
+    	Fertilization_Controller fertilizationController = loader.getController();
+    	fertilizationController.setFertilizationData(currentPlant); // Pass the current plant 
+    	Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); 
+    	stage.setScene(new Scene(root)); stage.show(); } catch (IOException e) { e.printStackTrace(); 
+    	
+    	} } 
+    
+    
+    @FXML void onClick_button(ActionEvent event) { 
+    	try { FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerHomePage.fxml")); 
+    	Parent root = loader.load(); CustomerHomePageController controller = loader.getController();
+    	int customerId = UserId.getCustomerId(); 
+    	System.out.print(customerId + " in the plant details");
+    	controller.setCustomerId(customerId); 
+    	Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+    	stage.setScene(new Scene(root)); stage.show(); } 
+    	catch (IOException e) { e.printStackTrace(); 
+    	} }
+    	
+    
 }

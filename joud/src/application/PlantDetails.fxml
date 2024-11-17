@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPan" prefHeight="573.0" prefWidth="250.0" style="-fx-background-color: #467a64;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PlantDetailsController">
+<AnchorPane fx:id="mainPan" prefHeight="573.0" prefWidth="250.0" style="-fx-background-color: #5b8764;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PlantDetailsController">
    <children>
       <Pane layoutX="191.0" layoutY="280.0" prefHeight="121.0" prefWidth="122.0" style="-fx-background-color: #709c89; -fx-background-radius: 15;">
          <children>
@@ -38,10 +38,7 @@
                   <Image url="@Bloom%20Logo.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="plantImage" fitHeight="183.0" fitWidth="125.0" layoutX="193.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Monster_Deliciosa_-_x-_plantshopme-removebg-preview-removebg-preview%20(1).png" />
-               </image></ImageView>
+            <ImageView fx:id="plantImage" fitHeight="183.0" fitWidth="125.0" layoutX="193.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" />
             <Pane layoutX="45.0" layoutY="301.0" prefHeight="18.0" prefWidth="64.0" style="-fx-background-color: #d3deb8;" styleClass="circle" stylesheets="@style%20(1).css">
                <children>
                   <Label layoutX="11.0" layoutY="-7.0" prefHeight="32.0" prefWidth="50.0" stylesheets="@style%20(1).css" text="Healthy" textFill="#0a6f2c">
@@ -63,7 +60,7 @@
                   <Image url="@Screenshot_2024-10-28_211727-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button fx:id="Fertilization_Button" layoutX="38.0" layoutY="361.0" mnemonicParsing="false" onAction="#checkFertilization" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: #afc989; -fx-background-radius: 10;" text="check Fertilization" textFill="WHITE">
+            <Button fx:id="Fertilization_Button" layoutX="38.0" layoutY="361.0" mnemonicParsing="false" onAction="#move_to_Fertilization" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: #afc989; -fx-background-radius: 10;" text="check Fertilization" textFill="WHITE">
                <effect>
                   <Blend />
                </effect>

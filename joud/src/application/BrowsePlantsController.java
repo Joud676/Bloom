@@ -90,20 +90,18 @@ public class BrowsePlantsController {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
-            // Updated SQL query to filter plants by sellerId
-            String sql = "SELECT plantName, price, characteristics, image FROM plant WHERE sellerId = ? LIMIT 4";
+            String sql = "SELECT plantId, plantName, price, characteristics, image FROM plant WHERE sellerId = ? LIMIT 4";
             PreparedStatement statement = connection.prepareStatement(sql);
-            
-            // Set the sellerId parameter in the query
             statement.setInt(1, UserId.getSellerId());
-            
+
             ResultSet resultSet = statement.executeQuery();
 
             int index = 0;
             while (resultSet.next() && index < 4) {
+                int plantId = resultSet.getInt("plantId");
                 byte[] imageBytes = resultSet.getBytes("image");
                 String plantName = resultSet.getString("plantName");
-                double price = resultSet.getDouble("price"); 
+                double price = resultSet.getDouble("price");
                 String characteristics = resultSet.getString("characteristics");
 
                 plantNames[index] = plantName;
@@ -124,6 +122,10 @@ public class BrowsePlantsController {
                         setPlantDetails(imageBytes, plantName, price, image4, text4, price4);
                         break;
                 }
+
+                // Check the stock for each plant
+                checkPlantStock(plantId);
+
                 index++;
             }
         } catch (Exception e) {
@@ -222,5 +224,38 @@ public class BrowsePlantsController {
         }
     }
 
+    private void checkPlantStock(int plantId) {
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+            String sql = "SELECT quantity FROM plant WHERE plantId = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, plantId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int quantity = resultSet.getInt("quantity");
+
+                if (quantity <= 3) {
+                    showLowStockNotification(plantId, quantity);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    private void showLowStockNotification(int plantId, int quantity) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Low Stock Alert");
+        alert.setHeaderText("Low Stock for Plant ID: " + plantId);
+        alert.setContentText("The stock for this plant is low. Current quantity: " + quantity);
+        alert.showAndWait();
+    }
     
 }

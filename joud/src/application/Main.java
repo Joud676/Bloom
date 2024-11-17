@@ -58,7 +58,7 @@ public class Main {
 				}
 
 				// Create the Plant instance and upload it
-				Plant plant = new Plant(plantId, name, characteristic, careInfo, price, quantity, fertilization);
+				Plant plant = new Plant(plantId, name, characteristic, careInfo, price, quantity,fertilization);
 				seller.uploadPlant(plant);
 			}
 		} else {
