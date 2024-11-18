@@ -48,18 +48,6 @@ public class BrowsePlantsController {
     private Label price4;
     
     @FXML
-    private ImageView cart1;
-    
-    @FXML
-    private ImageView cart2;
-    
-    @FXML
-    private ImageView cart3;
-    
-    @FXML
-    private ImageView cart4;
-    
-    @FXML
     private Button checkoutButton;
     
     @FXML
@@ -230,25 +218,31 @@ public class BrowsePlantsController {
     
     @FXML
     void onClick_button() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SellerHomePage.fxml"));
-            Parent root = loader.load();
-            
-            // Get the CustomerHomePageController
-            CustomerHomePageController controller = loader.getController();
-            
-            // Set the customer ID and call loadPlantCards again
-            int customerId = UserId.getCustomerId();
-            System.out.print(customerId + " in the plant details");
-            controller.setCustomerId(customerId);
 
-            Stage currentStage = (Stage) back.getScene().getWindow();
+try {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("SellerHomePage.fxml"));
+    Parent root = loader.load();
 
-            Scene newScene = new Scene(root);
-            currentStage.setScene(newScene);
+    // Get the CustomerHomePageController
+    CustomerHomePageController controller = loader.getController();
 
-        } catch (Exception e) {
-            e.printStackTrace(); 
-        }
+    // Set the customer ID and call loadPlantCards again
+    int customerId = UserId.getCustomerId();
+    System.out.print(customerId + " in the plant details");
+    controller.setCustomerId(customerId);
+
+    Stage currentStage = (Stage) back.getScene().getWindow();
+
+    Scene newScene = new Scene(root);
+    currentStage.setScene(newScene);
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+// Simplified navigation for fallback
+Stage currentStage = (Stage) back.getScene().getWindow();
+Navigation.navigateTo("SellerHomePage.fxml", currentStage);
+
     }
 }

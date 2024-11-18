@@ -43,6 +43,7 @@ public class AddPlantController {
     @FXML
     private TextArea Fertilization_Text;
 
+
     @FXML 
     private Button back;
     private File selectedImageFile;
@@ -146,6 +147,7 @@ public class AddPlantController {
         System.exit(0);
     }
 
+
     @FXML
     void onClick_button() {
         try {
@@ -159,5 +161,7 @@ public class AddPlantController {
         } catch (Exception e) {
             e.printStackTrace(); 
         }
-    }
 }
+	    }
+	 
+

@@ -1,132 +1,133 @@
 package application;
-import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Plant {
 
-		private int plantId;
-		private String name;
-		private String characteristic;
-		private String careInfo;
-		private Double price;
-		private int quantity;
-		private List<String> fertilization;
-		private byte[] image; 
+    private int plantId;
+    private String name;
+    private String characteristic;
+    private String careInfo;
+    private Double price;
+    private int quantity;
+    private List<String> fertilization;
+    private byte[] image;
 
-		public Plant(int plantId, String plantName, String characteristics, String careInfo, double price, int quantity, List<String> fertilization, byte[] image) {
-	        this.plantId = plantId;
-	        this.name = plantName;
-	        this.characteristic = characteristics;
-	        this.careInfo = careInfo;
-	        this.price = price;
-	        this.quantity = quantity;
-	        this.fertilization = fertilization;
-	        this.image = image;
-	    }
-// second constructor without image
-	 public Plant(int plantId, String name, String characteristic, String careInfo, double price, int quantity, List<String> fertilizationList) 
-	 { this.plantId = plantId; 
-	 this.name = name;
-	 this.characteristic = characteristic; 
-	 this.careInfo = careInfo; 
-	 this.price = price; 
-	 this.quantity = quantity; 
-	 this.fertilization = fertilizationList;
-	 }
+    // Constructor with all fields including image
+    public Plant(int plantId, String plantName, String characteristics, String careInfo, double price, int quantity, List<String> fertilization, byte[] image) {
+        this.plantId = plantId;
+        this.name = plantName;
+        this.characteristic = characteristics;
+        this.careInfo = careInfo;
+        this.price = price;
+        this.quantity = quantity;
+        this.fertilization = (fertilization != null) ? fertilization : new ArrayList<>();
+        this.image = image;
+    }
 
-		public void setPlantId(int plantId) {
-			this.plantId = plantId;
-		}
+    // Constructor without image
+    public Plant(int plantId, String name, String characteristic, String careInfo, double price, int quantity, List<String> fertilizationList) {
+        this(plantId, name, characteristic, careInfo, price, quantity, fertilizationList, null);
+    }
 
-		public void setFertilization(List<String> fertilization) {
-			this.fertilization = fertilization;
-		}
+    // Constructor for browsing
+    public Plant(byte[] browseImage, String browseName, String browseCharacteristic, double browsePrice) {
+        this(0, browseName, browseCharacteristic, null, browsePrice, 0, null, browseImage);
+    }
 
-		public void setQuantity(int quantity) {
-			this.quantity = quantity;
-		}
+    // Getters and Setters
+    public int getPlantId() {
+        return plantId;
+    }
 
-		public void setPrice(Double price) {
-			this.price = price;
-		}
+    public void setPlantId(int plantId) {
+        this.plantId = plantId;
+    }
 
-		public void setCareInfo(String careInfo) {
-			this.careInfo = careInfo;
-		}
+    public String getName() {
+        return name;
+    }
 
-		public void setCharacteristic(String characteristic) {
-			this.characteristic = characteristic;
-		}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-		public void setName(String name) {
-			this.name = name;
-		}
+    public String getCharacteristic() {
+        return characteristic;
+    }
 
-		public void setImage( byte[] image) {
-			this.image = image;
-		}
-		
-		
-  // Database Retrieval 
+    public void setCharacteristic(String characteristic) {
+        this.characteristic = characteristic;
+    }
 
+    public String getCareInfo() {
+        return careInfo;
+    }
 
-		public byte[] getImage() {
-			return image;
-		}
+    public void setCareInfo(String careInfo) {
+        this.careInfo = careInfo;
+    }
 
-		public int getPlantId() {
-			return plantId;
-		}
+    public Double getPrice() {
+        return price;
+    }
 
-		public String getName() {
-			return name;
-		}
+    public void setPrice(Double price) {
+        if (price != null && price >= 0) {
+            this.price = price;
+        }
+    }
 
-		public String getCharacteristic() {
-			return characteristic;
-		}
+    public int getQuantity() {
+        return quantity;
+    }
 
-		public String getCareInfo() {
-			return careInfo;
-		}
+    public void setQuantity(int quantity) {
+        if (quantity >= 0) {
+            this.quantity = quantity;
+        }
+    }
 
-		public Double getPrice() {
-			return price;
-		}
+    public List<String> getFertilization() {
+        return fertilization;
+    }
 
-		public List<String> getFertilization() {
-			return fertilization;
-		}
+    public void setFertilization(List<String> fertilization) {
+        this.fertilization = (fertilization != null) ? fertilization : new ArrayList<>();
+    }
 
-		public String plantDetails(int plantId) {
-			return toString();
-		}
+    public byte[] getImage() {
+        return image;
+    }
 
-		public int checkQuantity(int plantId) {
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
-			return quantity;
+    // Static method to check fertilization compatibility
+    public static String checkFertilization(Plant plant1, Plant plant2) {
+        if (plant1 == null || plant2 == null) {
+            return "Invalid plants provided for comparison.";
+        }
+        List<String> fertilization1 = plant1.getFertilization();
+        List<String> fertilization2 = plant2.getFertilization();
+        if (fertilization1 != null && fertilization2 != null &&
+            fertilization1.contains(plant2.getName()) && fertilization2.contains(plant1.getName())) {
+            return "The plants " + plant1.getName() + " and " + plant2.getName() + " can be fertilized together.";
+        } else {
+            return "The plants " + plant1.getName() + " and " + plant2.getName() + " cannot be fertilized together.";
+        }
+    }
 
-		}
-
-		public int getQuantity() {
-			return quantity;
-
-		}
-
-		public static String checkFertilization(Plant plant1, Plant plant2) {
-			if (plant1.getFertilization().contains(plant2.getName())
-					&& plant2.getFertilization().contains(plant1.getName())) {
-				return "The plants " + plant1.getName() + " and " + plant2.getName() + " can be fertilized together.";
-			} else {
-				return "The plants " + plant1.getName() + " and " + plant2.getName() + " cannot be fertilized together.";
-			}
-		}
-
-		@Override
-		public String toString() {
-			return "Plant ID: " + plantId + "\n" + "Name: " + name + "\n" + "Characteristics: " + characteristic + "\n"
-					+ "Care Information: " + careInfo + "\n" + "Price: " + price + "\n" + "Quantity: " + quantity + "\n"
-					+ "Fertilization: " + String.join(", ", fertilization);
-		}
-
-	}
+    @Override
+    public String toString() {
+        return "Plant ID: " + plantId + "\n" +
+               "Name: " + name + "\n" +
+               "Characteristics: " + characteristic + "\n" +
+               "Care Information: " + careInfo + "\n" +
+               "Price: " + price + "\n" +
+               "Quantity: " + quantity + "\n" +
+               "Fertilization: " + (fertilization != null ? String.join(", ", fertilization) : "None");
+    }
+}

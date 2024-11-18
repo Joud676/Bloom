@@ -157,19 +157,16 @@ public class SignupController {
     }
     
     private boolean validateInputs(String username, String email, String password, String accountTypeSelection) {
-        // Check if any fields are empty
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || accountTypeSelection == null) {
             showAlert(Alert.AlertType.ERROR, "Validation Error", "All fields are required.");
             return false;
         }
 
-        // Check email format
         if (!isValidEmail(email)) {
             showAlert(Alert.AlertType.ERROR, "Validation Error", "Invalid email format.");
             return false;
         }
 
-        // Check password format
         if (!isValidPassword(password)) {
             showAlert(Alert.AlertType.ERROR, "Validation Error", 
                       "Password must be at least 8 characters long and contain a mix of upper and lower case letters, numbers, and special characters.");
@@ -179,13 +176,11 @@ public class SignupController {
         return true;
     }
 
-    // Helper method to validate email format
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         return Pattern.matches(emailRegex, email);
     }
 
-    // Helper method to validate password format
     private boolean isValidPassword(String password) {
         String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}$";
         return Pattern.matches(passwordRegex, password);

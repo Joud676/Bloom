@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -54,9 +55,6 @@ public class CustomerHomePageController {
     private Button Home_button;
 
     @FXML
-    private Button back_Button1;
-
-    @FXML
     private Button cart_button;
 
     @FXML
@@ -85,6 +83,12 @@ public class CustomerHomePageController {
 
     @FXML
     private VBox vboxContainer;
+    
+    @FXML
+    private ImageView profileImg;
+    
+    @FXML
+    private ImageView profile;
     
     public void loadPlantCards() {
         try {
@@ -147,16 +151,24 @@ public class CustomerHomePageController {
     @FXML
     void moveTo_Market(ActionEvent event) {
     	try {
+    		  // Load the FXML file for the BrowseCustomerPlants page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BrowseCustomerPlants.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) ((Scene) newPlant_Button.getScene()).getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Buy Plant");
+            // Get the current stage (window) and set the new scene
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
             stage.show();
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Loading Failed", "Error loading Buy Plant Page: " + e.getMessage());
-        }    }
+    	} catch (Exception e) {
+    	    Alert alert = new Alert(Alert.AlertType.ERROR);
+    	    alert.setTitle("Loading Failed");
+    	    alert.setHeaderText("Error loading Buy Plant Page");
+    	    alert.setContentText(e.getMessage());
+    	    alert.showAndWait();
+    	    e.printStackTrace();  // This will print the stack trace for more details
+    	}
+ }
     
     @FXML
     void search(ActionEvent event) {
@@ -182,12 +194,16 @@ public class CustomerHomePageController {
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error occurred while searching for the plant.", "Error", JOptionPane.ERROR_MESSAGE);
-        
-
-    }
+    }}
+    
+     @FXML  
+     void toProfile() {
+    	 Stage stage = (Stage) newPlant_Button.getScene().getWindow();
+         Navigation.navigateTo("CustomerProfile.fxml", stage);   
+     }
 
 }
-}
+
 
 
 

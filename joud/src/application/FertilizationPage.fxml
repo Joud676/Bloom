@@ -23,21 +23,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="191.0" layoutY="280.0" prefHeight="121.0" prefWidth="122.0" style="-fx-background-color: #709c89; -fx-background-radius: 15;">
-         <children>
-            <ImageView fitHeight="76.0" fitWidth="76.0" layoutX="23.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Screenshot_2024-10-30_003332-removebg-preview%20(1).png" />
-               </image>
-            </ImageView>
-            <Text fill="WHITE" layoutX="16.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="next watering " wrappingWidth="90.5">
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
-      <Pane layoutY="194.0" prefHeight="378.0" prefWidth="313.0" style="-fx-background-color: #fcfcf5;" styleClass="scrollpan">
+      <Pane layoutY="194.0" prefHeight="378.0" prefWidth="311.0" style="-fx-background-color: #fcfcf5;" styleClass="scrollpan">
          <children>
             <Text fill="#0a4511" layoutX="21.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter the name of another plant to check compatibility with [Selected Plant]." wrappingWidth="261.5" />
             <TextField fx:id="Plant2_Name" layoutX="21.0" layoutY="134.0" prefHeight="25.0" prefWidth="233.0" style="-fx-background-radius: 15; -fx-background-color: white;" styleClass="searchpan" stylesheets="@style%20(1).css" />
@@ -62,7 +48,10 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Text>
-            <Text fx:id="Result_Of_Fertilizastion" fill="#1d602f" layoutX="37.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".........." wrappingWidth="228.0" />
+            <Text fx:id="Result_Of_Fertilizastion" fill="#1d602f" layoutX="37.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".........." wrappingWidth="228.0">
+               <font>
+                  <Font size="13.0" />
+               </font></Text>
             <ImageView fx:id="plantImage1" fitHeight="60.0" fitWidth="60.0" layoutX="-4.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../Downloads/Screenshot_2024-11-16_032434-removebg-preview.png" />
