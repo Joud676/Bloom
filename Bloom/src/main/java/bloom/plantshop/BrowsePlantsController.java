@@ -1,4 +1,4 @@
-package application;
+package bloom.plantshop;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,19 +65,22 @@ public class BrowsePlantsController {
     @FXML
     private Button back;
 
+
+    
     private String[] plantNames = new String[4];
     private double[] plantPrices = new double[4];
     private String[] plantCharacteristics = new String[4];
+    private String[] careInformation = new String[4];
 
-    private static final String URL = "jdbc:mysql://localhost:3306/local_bloom_ranad";
+
+    private static final String URL = "jdbc:mysql://localhost:3306/bloom";
     private static final String USER = "root";
-    private static final String PASSWORD = "Rr120178593!";
+    private static final String PASSWORD = "100398";
 
     @FXML
     public void initialize() {
         try {
             loadPlants();
-            checkPlantQuantities(); // Check plant quantities after loading plants
         } catch (Exception e) {
             e.printStackTrace(); 
         }
@@ -89,39 +92,44 @@ public class BrowsePlantsController {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
-            String sql = "SELECT plantId, plantName, price, characteristics, image, quantity FROM plant WHERE sellerId = ? LIMIT 4";
+            // Updated SQL query to filter plants by sellerId
+            String sql = "SELECT plantName, price, characteristics, image, careInfo FROM plant WHERE sellerId = ? LIMIT 4";
             PreparedStatement statement = connection.prepareStatement(sql);
+            
+            // Set the sellerId parameter in the query
             statement.setInt(1, UserId.getSellerId());
-
+            
             ResultSet resultSet = statement.executeQuery();
 
             int index = 0;
             while (resultSet.next() && index < 4) {
-                int plantId = resultSet.getInt("plantId");
                 byte[] imageBytes = resultSet.getBytes("image");
                 String plantName = resultSet.getString("plantName");
-                double price = resultSet.getDouble("price");
+                double price = resultSet.getDouble("price"); 
                 String characteristics = resultSet.getString("characteristics");
+                String plantInfo = resultSet.getString("careInfo");
+                
 
                 plantNames[index] = plantName;
                 plantPrices[index] = price;
                 plantCharacteristics[index] = characteristics;
+                careInformation[index]= plantInfo;
+                
 
                 switch (index) {
                     case 0:
-                        setPlantDetails(imageBytes, plantName, price, image1, text1, price1);
+                        setPlantDetails(imageBytes, plantName, price, image1, text1, price1, cart1);
                         break;
                     case 1:
-                        setPlantDetails(imageBytes, plantName, price, image2, text2, price2);
+                        setPlantDetails(imageBytes, plantName, price, image2, text2, price2, cart2);
                         break;
                     case 2:
-                        setPlantDetails(imageBytes, plantName, price, image3, text3, price3);
+                        setPlantDetails(imageBytes, plantName, price, image3, text3, price3, cart3);
                         break;
                     case 3:
-                        setPlantDetails(imageBytes, plantName, price, image4, text4, price4);
+                        setPlantDetails(imageBytes, plantName, price, image4, text4, price4, cart4);
                         break;
                 }
-
                 index++;
             }
         } catch (Exception e) {
@@ -131,17 +139,21 @@ public class BrowsePlantsController {
         }
     }
 
-    private void setPlantDetails(byte[] buf, String plantName, double price, ImageView imageView, Label plantNameLabel, Label priceLabel) {
+
+    private void setPlantDetails(byte[] buf, String plantName, double price, ImageView imageView, Label plantNameLabel, Label priceLabel, ImageView cart) {
         plantNameLabel.setText(plantName != null ? plantName : "Unknown Plant");
 
         priceLabel.setText(String.format("%.2f", price));
+        cart.setImage(new Image(getClass().getResource("/bloom/plantshop/shopping.png").toExternalForm()));
 
         if (buf != null) {
             InputStream inputStream = new ByteArrayInputStream(buf);
             Image image = new Image(inputStream);
             imageView.setImage(image);
+
         } else {
             System.err.println("Image byte array is null for " + plantName);
+          
         }
     }
     
@@ -149,11 +161,13 @@ public class BrowsePlantsController {
         String plantName = plantNames[index];
         double price = plantPrices[index];
         String characteristics = plantCharacteristics[index];
+        String careInfoo = careInformation[index];
+
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Plant Information");
         alert.setHeaderText(plantName);
-        alert.setContentText("Price: " + String.format("%.2f", price) + "\nCharacteristics: " + characteristics);
+        alert.setContentText("Price: " + String.format("%.2f", price) + "\nCharacteristics: " + characteristics + "\nCare Information: " + careInfoo);
         alert.showAndWait();
     }
 
@@ -168,41 +182,6 @@ public class BrowsePlantsController {
         } else if (event.getSource() == image4) {
             retrieveInfo(3);
         }
-    }
-
-    private void checkPlantQuantities() {
-        Connection connection = null;
-
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-
-            String sql = "SELECT plantName, quantity FROM plant WHERE sellerId = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, UserId.getSellerId());
-
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                String plantName = resultSet.getString("plantName");
-                int quantity = resultSet.getInt("quantity");
-
-                if (quantity <= 3) {
-                    showLowStockNotification(plantName, quantity);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection(connection);
-        }
-    }
-
-    private void showLowStockNotification(String plantName, int quantity) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Low Stock Alert");
-        alert.setHeaderText("Low Stock for Plant: " + plantName);
-        alert.setContentText("The stock for this plant is low.\n Current quantity: " + quantity);
-        alert.showAndWait();
     }
 
     private void closeConnection(Connection connection) {
@@ -233,22 +212,16 @@ public class BrowsePlantsController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SellerHomePage.fxml"));
             Parent root = loader.load();
-            
-            // Get the CustomerHomePageController
-            CustomerHomePageController controller = loader.getController();
-            
-            // Set the customer ID and call loadPlantCards again
-            int customerId = UserId.getCustomerId();
-            System.out.print(customerId + " in the plant details");
-            controller.setCustomerId(customerId);
 
             Stage currentStage = (Stage) back.getScene().getWindow();
 
             Scene newScene = new Scene(root);
             currentStage.setScene(newScene);
-
+            currentStage.show();
         } catch (Exception e) {
             e.printStackTrace(); 
         }
     }
+
+    
 }
