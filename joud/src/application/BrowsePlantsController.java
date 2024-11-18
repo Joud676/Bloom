@@ -48,25 +48,11 @@ public class BrowsePlantsController {
     private Label price4;
     
     @FXML
-    private ImageView cart1;
-    
-    @FXML
-    private ImageView cart2;
-    
-    @FXML
-    private ImageView cart3;
-    
-    @FXML
-    private ImageView cart4;
-    
-    @FXML
     private Button checkoutButton;
     
     @FXML
     private Button back;
 
-
-    
     private String[] plantNames = new String[4];
     private double[] plantPrices = new double[4];
     private String[] plantCharacteristics = new String[4];
@@ -79,6 +65,7 @@ public class BrowsePlantsController {
     public void initialize() {
         try {
             loadPlants();
+            checkPlantQuantities(); // Check plant quantities after loading plants
         } catch (Exception e) {
             e.printStackTrace(); 
         }
@@ -90,20 +77,18 @@ public class BrowsePlantsController {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
-            // Updated SQL query to filter plants by sellerId
-            String sql = "SELECT plantName, price, characteristics, image FROM plant WHERE sellerId = ? LIMIT 4";
+            String sql = "SELECT plantId, plantName, price, characteristics, image, quantity FROM plant WHERE sellerId = ? LIMIT 4";
             PreparedStatement statement = connection.prepareStatement(sql);
-            
-            // Set the sellerId parameter in the query
             statement.setInt(1, UserId.getSellerId());
-            
+
             ResultSet resultSet = statement.executeQuery();
 
             int index = 0;
             while (resultSet.next() && index < 4) {
+                int plantId = resultSet.getInt("plantId");
                 byte[] imageBytes = resultSet.getBytes("image");
                 String plantName = resultSet.getString("plantName");
-                double price = resultSet.getDouble("price"); 
+                double price = resultSet.getDouble("price");
                 String characteristics = resultSet.getString("characteristics");
 
                 plantNames[index] = plantName;
@@ -124,6 +109,7 @@ public class BrowsePlantsController {
                         setPlantDetails(imageBytes, plantName, price, image4, text4, price4);
                         break;
                 }
+
                 index++;
             }
         } catch (Exception e) {
@@ -132,7 +118,6 @@ public class BrowsePlantsController {
             closeConnection(connection);
         }
     }
-
 
     private void setPlantDetails(byte[] buf, String plantName, double price, ImageView imageView, Label plantNameLabel, Label priceLabel) {
         plantNameLabel.setText(plantName != null ? plantName : "Unknown Plant");
@@ -145,7 +130,6 @@ public class BrowsePlantsController {
             imageView.setImage(image);
         } else {
             System.err.println("Image byte array is null for " + plantName);
-          
         }
     }
     
@@ -174,6 +158,41 @@ public class BrowsePlantsController {
         }
     }
 
+    private void checkPlantQuantities() {
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+            String sql = "SELECT plantName, quantity FROM plant WHERE sellerId = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, UserId.getSellerId());
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String plantName = resultSet.getString("plantName");
+                int quantity = resultSet.getInt("quantity");
+
+                if (quantity <= 3) {
+                    showLowStockNotification(plantName, quantity);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    private void showLowStockNotification(String plantName, int quantity) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Low Stock Alert");
+        alert.setHeaderText("Low Stock for Plant: " + plantName);
+        alert.setContentText("The stock for this plant is low.\n Current quantity: " + quantity);
+        alert.showAndWait();
+    }
+
     private void closeConnection(Connection connection) {
         if (connection != null) {
             try {
@@ -199,9 +218,7 @@ public class BrowsePlantsController {
     
     @FXML
     void onClick_button() {
-        Stage stage = (Stage) back.getScene().getWindow();
-        Navigation.navigateTo("SellerHomePage.fxml", stage);
+        Stage currentStage = (Stage) back.getScene().getWindow();
+        Navigation.navigateTo("SellerHomePage.fxml", currentStage);
     }
-
-    
 }
