@@ -1,5 +1,6 @@
 package application;
 
+import javafx.geometry.Insets;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,6 +39,8 @@ public class BrowseCustomerPlantsController {
 
 	    @FXML
 	    void checkoutAction(ActionEvent event) {
+                Stage currentStage = (Stage) back.getScene().getWindow();
+                Navigation.navigateTo("CheckoutPage.fxml", currentStage);
 
 	    }
 
@@ -49,7 +52,6 @@ public class BrowseCustomerPlantsController {
 	PreparedStatement statement;
 
 
-	@FXML
 	public void initialize() {
 		try {
 			displayPlantCard();
@@ -74,7 +76,8 @@ public class BrowseCustomerPlantsController {
 	            String plantName = resultSet.getString("plantName");
 	            String characteristics = resultSet.getString("characteristics");
 	            double price = resultSet.getDouble("price");
-	            plant = new Plant(imageBytes, plantName, characteristics, price);
+                    int id = resultSet.getInt("plantId");
+	            plant = new Plant(imageBytes, plantName, characteristics, price, id);
 
 	            browseData.add(plant); // Add plant to the list
 	        }
@@ -110,6 +113,7 @@ public class BrowseCustomerPlantsController {
 	            }
 
 	            browseGrid.add(pane, column++, row);
+                    GridPane.setMargin(pane, new Insets(5));
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -118,54 +122,16 @@ public class BrowseCustomerPlantsController {
 	    }
 	}
 
-
-//	private void setPlantDetails(byte[] buf, String plantName, double price, ImageView imageView, Label plantNameLabel,
-//			Label priceLabel) {
-//		plantNameLabel.setText(plantName != null ? plantName : "Unknown Plant");
-//
-//		priceLabel.setText(String.format("%.2f", price));
-//
-//		if (buf != null) {
-//			InputStream inputStream = new ByteArrayInputStream(buf);
-//			Image image = new Image(inputStream);
-//			imageView.setImage(image);
-//		} else {
-//			System.err.println("Image byte array is null for " + plantName);
-//
-//		}
-//	}
-
-//	private void retrieveInfo(int index) {
-//		String plantName = plantNames[index];
-//		double price = plantPrices[index];
-//		String characteristics = plantCharacteristics[index];
-//
-//		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//		alert.setTitle("Plant Information");
-//		alert.setHeaderText(plantName);
-//		alert.setContentText("Price: " + String.format("%.2f", price) + "\nCharacteristics: " + characteristics);
-//		alert.showAndWait();
-//	}
-
-	private void closeConnection(Connection connection) {
-		if (connection != null) {
-			try {
-				connection.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	@FXML
 	public void searchPlant() {
 
 	}
 
-	@FXML
 	public void checkOut() {
+            
+            
 	}
 
-	@FXML
 	public void AddToCart() {
 	}
 

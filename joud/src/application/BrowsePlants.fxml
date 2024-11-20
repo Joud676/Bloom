@@ -23,8 +23,15 @@
 					<children>
 						<HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);">
 							<children>
-                  			            <Button fx:id="back" mnemonicParsing="false" onAction="#onClick_button" style="-fx-background-radius: 30; -fx-cursor: hand;" text="&lt;-" />
-								<Label alignment="CENTER" prefHeight="20.0" prefWidth="179.0" text="                  My Plants" textAlignment="CENTER" textFill="WHITE">
+                  			            <Button fx:id="back" mnemonicParsing="false" onAction="#onClick_button" style="-fx-background-radius: 30; -fx-cursor: hand; -fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@pics/backIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+								<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="139.0" text="                  My Plants" textAlignment="CENTER" textFill="WHITE">
 									<font>
 										<Font name="Cambria Bold" size="15.0" />
 									</font>
@@ -39,7 +46,7 @@
             							<children>
             								<TextField fx:id="searchTextField" prefHeight="25.0" prefWidth="168.0" promptText=" search for plant here" stylesheets="@../../../../../../bin/bloom/plantshop/style.css">
             									<HBox.margin>
-            										<Insets left="20.0" />
+            										<Insets left="10.0" />
             									</HBox.margin>
             									<font>
             										<Font size="10.0" />
@@ -49,7 +56,10 @@
             										<String fx:value="secarch-box" />
             									</styleClass>
             								</TextField>
-            								<Button fx:id="searchButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#searchPlant" styleClass="secarch-button" stylesheets="@../../../../../../bin/bloom/plantshop/style.css" text="search" textFill="WHITE" />
+            								<Button fx:id="searchButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#searchPlant" styleClass="secarch-button" stylesheets="@style%20(1).css" text="search" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin></Button>
             							</children>
             							<styleClass>
             								<String fx:value="secarch-box" />
@@ -75,7 +85,7 @@
 												<Label fx:id="text1" layoutX="75.0" layoutY="6.0" text=" " />
 												<ImageView fx:id="cart1" fitHeight="24.0" fitWidth="18.0" layoutX="111.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true">
 													<image>
-														<Image url="@shopping.png" />
+														<Image url="@pics/shopping.png" />
 													</image>
 												</ImageView>
 												<Label fx:id="price1" layoutX="75.0" layoutY="66.0" prefHeight="15.0" prefWidth="32.0" />
@@ -88,7 +98,7 @@
 												<Label fx:id="price2" layoutX="73.0" layoutY="66.0" prefHeight="15.0" prefWidth="32.0" />
 												<ImageView fx:id="cart2" fitHeight="24.0" fitWidth="18.0" layoutX="110.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true">
 													<image>
-														<Image url="@shopping.png" />
+														<Image url="@pics/shopping.png" />
 													</image>
 												</ImageView>
 											</children>
@@ -105,7 +115,7 @@
 												<Label fx:id="price3" layoutX="71.0" layoutY="61.0" prefHeight="15.0" prefWidth="32.0" />
 												<ImageView fx:id="cart3" fitHeight="24.0" fitWidth="18.0" layoutX="110.0" layoutY="57.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true">
 													<image>
-														<Image url="@shopping.png" />
+														<Image url="@pics/shopping.png" />
 													</image>
 												</ImageView>
 											</children>
@@ -116,7 +126,7 @@
 												<Label fx:id="text4" layoutX="93.0" layoutY="6.0" />
 												<ImageView fx:id="cart4" fitHeight="24.0" fitWidth="18.0" layoutX="129.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true">
 													<image>
-														<Image url="@shopping.png" />
+														<Image url="@pics/shopping.png" />
 													</image>
 												</ImageView>
 												<Label fx:id="price4" layoutX="93.0" layoutY="66.0" prefHeight="15.0" prefWidth="32.0" />
@@ -136,18 +146,18 @@
 					<children>
 						<ImageView fitHeight="40.0" fitWidth="303.0" layoutX="-6.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@Status%20bar.png" />
+								<Image url="@pics/Status%20bar.png" />
 							</image>
 						</ImageView>
 					</children>
 				</Pane>
 			</top>
 			<bottom>
-				<Pane prefHeight="22.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" stylesheets="@../../../../../../bin/bloom/plantshop/style.css" BorderPane.alignment="CENTER">
+				<Pane prefHeight="22.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" stylesheets="@style%20(1).css" BorderPane.alignment="CENTER">
 					<children>
 						<ImageView fitHeight="36.0" fitWidth="164.0" layoutX="65.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@Home%20Indicator.png" />
+								<Image url="@pics/Home%20Indicator.png" />
 							</image>
 						</ImageView>
 					</children>

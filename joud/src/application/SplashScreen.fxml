@@ -8,12 +8,12 @@
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="68.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Bloom Logo Splash Screen.gif" />
+            <Image url="@pics/Bloom%20Logo%20Splash%20Screen.gif" />
          </image>
       </ImageView>
       <ImageView fx:id="HomeIndicator" fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="476.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Home Indicator.png" />
+            <Image url="@pics/Home%20Indicator.png" />
          </image>
       </ImageView>
    </children>

@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="138.0" fitWidth="120.0" layoutX="88.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Bloom Logo.jpg" />
+            <Image url="@pics/Bloom%20Logo.jpg" />
          </image>
       </ImageView>
       <Button fx:id="Login" layoutX="101.0" layoutY="306.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #607f41; -fx-cursor: hand;" text="Login" textFill="WHITE">
@@ -25,12 +25,12 @@
       </Button>
       <ImageView fitHeight="42.0" fitWidth="294.0" layoutX="1.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Status bar.png" />
+            <Image url="@pics/Status%20bar.png" />
          </image>
       </ImageView>
        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="476.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Home Indicator.png" />
+            <Image url="@pics/Home%20Indicator.png" />
          </image>
       </ImageView>
       <TextField fx:id="usernameText" layoutX="40.0" layoutY="172.0" prefHeight="27.0" prefWidth="214.0" promptText="Name" style="-fx-background-radius: 5; -fx-border-radius: 10; -fx-border-color: #607f41; -fx-background-color: white;" />

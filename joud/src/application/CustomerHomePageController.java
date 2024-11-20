@@ -47,9 +47,6 @@ public class CustomerHomePageController {
 
 		}
 	
-    private final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad";
-    private final String DB_USER = "root";
-    private final String DB_PASSWORD = "Rr120178593!";
 
     @FXML
     private Button Home_button;
@@ -176,7 +173,7 @@ public class CustomerHomePageController {
     	String plantName = search_text_Field.getText().toLowerCase();
         String query = "SELECT * FROM plants WHERE LOWER(name) = ?";
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = database.connectDB();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, plantName);

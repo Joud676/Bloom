@@ -34,14 +34,9 @@ public class loginController {
 
     @FXML
     private TextField usernameText;
-    
+
     @FXML
     private Button back2signup;
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad"; 
-    private static final String DB_USER = "root"; 
-    private static final String DB_PASSWORD = "Rr120178593!";
-    
 
     @FXML
     void login(ActionEvent event) {
@@ -56,15 +51,15 @@ public class loginController {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password.");
         }
     }
-    
+
     @FXML
     void signup() {
         try {
             Parent signupRoot = FXMLLoader.load(getClass().getResource("signup.fxml"));
 
-            Stage stage = (Stage) back2signup.getScene().getWindow(); 
+            Stage stage = (Stage) back2signup.getScene().getWindow();
             stage.setScene(new Scene(signupRoot));
-            stage.setTitle("Signup"); 
+            stage.setTitle("Signup");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the signup interface.");
@@ -75,9 +70,7 @@ public class loginController {
         String querySeller = "SELECT sellerId FROM seller WHERE sellerName = ? AND password = ?";
         String queryCustomer = "SELECT customerId FROM customer WHERE customerName = ? AND password = ?";
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement statementSeller = connection.prepareStatement(querySeller);
-             PreparedStatement statementCustomer = connection.prepareStatement(queryCustomer)) {
+        try (Connection connection = database.connectDB(); PreparedStatement statementSeller = connection.prepareStatement(querySeller); PreparedStatement statementCustomer = connection.prepareStatement(queryCustomer)) {
 
             // Check in seller table
             statementSeller.setString(1, username);
@@ -87,7 +80,7 @@ public class loginController {
             if (resultSetSeller.next()) {
                 int sellerId = resultSetSeller.getInt("sellerId");
                 UserId.setSellerId(sellerId); // Store the sellerId in the UserId class
-                return "seller"; 
+                return "seller";
             }
 
             // Check in customer table
@@ -98,7 +91,7 @@ public class loginController {
             if (resultSetCustomer.next()) {
                 int customerId = resultSetCustomer.getInt("customerId");
                 UserId.setCustomerId(customerId); // Store the customerId in the UserId class
-                return "customer"; 
+                return "customer";
             }
 
         } catch (SQLException e) {
@@ -112,7 +105,7 @@ public class loginController {
             Stage stage = (Stage) Login.getScene().getWindow();
             Parent root;
             FXMLLoader loader;
-            
+
             if ("seller".equals(userType)) {
                 root = FXMLLoader.load(getClass().getResource("SellerHomePage.fxml"));
             } else {
@@ -125,7 +118,7 @@ public class loginController {
                 // Pass the customerId to the controller
                 int customerId = UserId.getCustomerId(); // Assuming UserId.getCustomerId() retrieves the ID
                 controller.setCustomerId(customerId);
-             //   System.out.println("Customer ID: " + customerId);
+                //   System.out.println("Customer ID: " + customerId);
             }
 
             stage.setScene(new Scene(root));
@@ -134,14 +127,13 @@ public class loginController {
         }
     }
 
-
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
     }
-    
+
     @FXML
     public void exit() {
         System.exit(0);

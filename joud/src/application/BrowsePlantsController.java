@@ -57,10 +57,6 @@ public class BrowsePlantsController {
     private double[] plantPrices = new double[4];
     private String[] plantCharacteristics = new String[4];
 
-    private static final String URL = "jdbc:mysql://localhost:3306/local_bloom_ranad";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Rr120178593!";
-
     @FXML
     public void initialize() {
         try {
@@ -75,7 +71,7 @@ public class BrowsePlantsController {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection = database.connectDB();
 
             String sql = "SELECT plantId, plantName, price, characteristics, image, quantity FROM plant WHERE sellerId = ? LIMIT 4";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -162,7 +158,7 @@ public class BrowsePlantsController {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection = database.connectDB();
 
             String sql = "SELECT plantName, quantity FROM plant WHERE sellerId = ?";
             PreparedStatement statement = connection.prepareStatement(sql);

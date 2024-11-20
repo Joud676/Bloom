@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPan" prefHeight="573.0" prefWidth="250.0" style="-fx-background-color: #e3ebdf;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Fertilization_Controller">
+<AnchorPane fx:id="mainPan" prefHeight="573.0" prefWidth="250.0" style="-fx-background-color: #e3ebdf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Fertilization_Controller">
    <children>
       <Pane layoutX="51.0" layoutY="114.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #d3deb8;" styleClass="circle" stylesheets="@style%20(1).css">
          <children>
@@ -54,27 +54,34 @@
                </font></Text>
             <ImageView fx:id="plantImage1" fitHeight="60.0" fitWidth="60.0" layoutX="-4.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Downloads/Screenshot_2024-11-16_032434-removebg-preview.png" />
+                  <Image url="@pics/Screenshot_2024-11-16_024212-removebg-preview.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
       <ImageView fitHeight="21.0" fitWidth="293.0" layoutX="13.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Screenshot_2024-10-28_211727-removebg-preview.png" />
+            <Image url="@pics/Screenshot_2024-10-28_211727-removebg-preview.png" />
          </image>
       </ImageView>
-      <Button fx:id="back_Button" layoutX="8.0" layoutY="50.0" mnemonicParsing="false" onAction="#onClick_button" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: #f7f7ed; -fx-background-radius: 10;" text="&lt;-">
+      <Button fx:id="back_Button" layoutX="8.0" layoutY="50.0" mnemonicParsing="false" onAction="#onClick_button" prefHeight="30.0" prefWidth="31.0" style="-fx-background-color: #d3deb8; -fx-background-radius: 10;">
          <effect>
             <Blend />
          </effect>
          <font>
             <Font size="10.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pics/backIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <ImageView fx:id="plantImage" fitHeight="139.0" fitWidth="108.0" layoutX="215.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Screenshot_2024-10-28_212635-removebg-preview%20(1).png" />
+            <Image url="@pics/Screenshot_2024-10-28_212635-removebg-preview%20(1).png" />
          </image>
       </ImageView>
       <Label fx:id="PlantName" layoutX="50.0" layoutY="82.0" prefHeight="22.0" prefWidth="126.0" text="Monstera Deliciosa" textFill="#030101">
@@ -82,7 +89,7 @@
             <Font name="System Italic" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="PlantName1" layoutX="42.0" layoutY="51.0" prefHeight="23.0" prefWidth="200.0" text="Fertilization Compatibility Check" textFill="#030101">
+      <Label fx:id="PlantName1" layoutX="48.0" layoutY="51.0" prefHeight="23.0" prefWidth="200.0" text="Fertilization Compatibility Check" textFill="#030101">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

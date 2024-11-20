@@ -49,10 +49,6 @@ public class AddPlantController {
     private File selectedImageFile;
 
     private FileChooser fileChooser;
-    // Database connection details
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad"; 
-    private static final String DB_USER = "root"; 
-    private static final String DB_PASSWORD = "Rr120178593!";
 
     // Method to handle importing the image
     @FXML
@@ -92,7 +88,7 @@ public class AddPlantController {
 
         System.out.println("Inserting plant: " + plantName + ", " + characteristics + ", " + careInfo + ", " + fertilizationInfo + ", " + price + ", " + quantity + ", " + UserId.getSellerId());
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = database.connectDB();
              PreparedStatement statement = connection.prepareStatement(
                  "INSERT INTO plant (plantName, characteristics, careInfo, fertilization_list, price, quantity, sellerId, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
 
