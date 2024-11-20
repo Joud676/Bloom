@@ -1,0 +1,67 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 20, 2024, 1:53:52 PM
+    Author     : lama1
+*/
+
+.table-view{
+    -fx-background-color: #fafcf5;
+    -fx-border-color : #e8eddf;
+    -fx-border-width: 2.5px;
+    -fx-padding: 0;
+    -fx-border-style:dashed;
+}
+
+.table-view .col{
+    -fx-background-color: #b3c78f;
+    -fx-background-insets: 1;
+
+}
+
+.table-view .col .label{
+    -fx-text-fill: #607f41;
+}
+
+.table-view .cell{
+    -fx-background-color: #fafcf5;
+    -fx-text-fill: #000000;
+    -fx-background-insets: 1;
+}
+
+.table-view .cell:selected { 
+    -fx-border-color: #7eae25;
+    -fx-border-width: 2px;           
+    -fx-border-style: solid;  
+    -fx-cursor: hand;
+}
+
+.green-btn{
+    -fx-background-color: linear-gradient(to bottom, #9db07b, #607f41);
+    -fx-border-color : #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-cursor: hand;
+}
+
+.green-btn:hover{
+    -fx-background-color: #607f41;
+}
+
+.gray-btn{
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #cccccc);
+    -fx-border-color : #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-cursor: hand;
+}
+
+.gray-btn:hover{
+    -fx-background-color: #cccccc;
+}

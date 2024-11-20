@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="mainPan" prefHeight="573.0" prefWidth="250.0" style="-fx-background-color: #e3ebdf;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plant.Fertilization_Controller">
+   <children>
+      <Pane layoutX="51.0" layoutY="114.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #d3deb8;" styleClass="circle" stylesheets="@../styles/general.css">
+         <children>
+            <Label layoutX="26.0" layoutY="4.0" prefHeight="18.0" prefWidth="52.0" stylesheets="@../styles/general.css" text="Healthy" textFill="#115c2a">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="194.0" prefHeight="378.0" prefWidth="311.0" style="-fx-background-color: #fcfcf5;" styleClass="scrollpan">
+         <children>
+            <Text fill="#0a4511" layoutX="21.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter the name of another plant to check compatibility with [Selected Plant]." wrappingWidth="261.5" />
+            <TextField fx:id="Plant2_Name" layoutX="21.0" layoutY="134.0" prefHeight="25.0" prefWidth="233.0" style="-fx-background-radius: 15; -fx-background-color: white;" styleClass="searchpan" stylesheets="@../styles/general.css" />
+            <Text fill="#0a4511" layoutX="21.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Plant Name:" wrappingWidth="141.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+            <Button fx:id="Fertilization_Button" layoutX="97.0" layoutY="343.0" mnemonicParsing="false" onAction="#checkFertilization" prefHeight="42.0" prefWidth="219.0" style="-fx-background-color: #97b071; -fx-background-radius: 10;" text="check Fertilization" textFill="WHITE">
+               <effect>
+                  <Blend />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Text fill="#0a4511" layoutX="21.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result :" wrappingWidth="141.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="Result_Of_Fertilizastion" fill="#1d602f" layoutX="37.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".........." wrappingWidth="228.0">
+               <font>
+                  <Font size="13.0" />
+               </font></Text>
+            <ImageView fx:id="plantImage1" fitHeight="60.0" fitWidth="60.0" layoutX="-4.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Screenshot_2024-11-16_024212-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="21.0" fitWidth="293.0" layoutX="13.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Screenshot_2024-10-28_211727-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="back_Button" layoutX="8.0" layoutY="50.0" mnemonicParsing="false" onAction="#onClick_button" prefHeight="30.0" prefWidth="31.0" style="-fx-background-color: #d3deb8; -fx-background-radius: 10;">
+         <effect>
+            <Blend />
+         </effect>
+         <font>
+            <Font size="10.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/backIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fx:id="plantImage" fitHeight="139.0" fitWidth="108.0" layoutX="215.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Screenshot_2024-10-28_212635-removebg-preview%20(1).png" />
+         </image>
+      </ImageView>
+      <Label fx:id="PlantName" layoutX="50.0" layoutY="82.0" prefHeight="22.0" prefWidth="126.0" text="Monstera Deliciosa" textFill="#030101">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="PlantName1" layoutX="48.0" layoutY="51.0" prefHeight="23.0" prefWidth="200.0" text="Fertilization Compatibility Check" textFill="#030101">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
