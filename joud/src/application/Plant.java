@@ -32,8 +32,8 @@ public class Plant {
     }
 
     // Constructor for browsing
-    public Plant(byte[] browseImage, String browseName, String browseCharacteristic, double browsePrice,int id) {
-        this(id, browseName, browseCharacteristic, null, browsePrice, 0, null, browseImage);
+    public Plant(byte[] browseImage, String browseName, String browseCharacteristic, double browsePrice) {
+        this(0, browseName, browseCharacteristic, null, browsePrice, 0, null, browseImage);
     }
 
     // Getters and Setters

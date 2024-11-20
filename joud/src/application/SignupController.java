@@ -41,6 +41,10 @@ public class SignupController {
     @FXML
     private Button back2login;
 
+    // Database connection details
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad"; 
+    private static final String DB_USER = "root"; 
+    private static final String DB_PASSWORD = "Rr120178593!";
     // Initialize method to set ComboBox items
     @FXML
     public void initialize() {
@@ -64,24 +68,24 @@ public class SignupController {
 
                 Optional<String> storeNameResult = dialog.showAndWait();
                 storeNameResult.ifPresent(storeName -> saveSellerToDatabase(username, email, password, storeName));
-                authenticateUser(username, password);
+                authenticateUser(username,password);
                 loadSellerHomePage();
             } else if ("Customer".equals(accountTypeSelection)) {
                 saveCustomerToDatabase(username, email, password);
-                authenticateUser(username, password);
+                authenticateUser(username,password);
                 loadCustomerHomePage();
             }
         }
     }
 
     @FXML
-    void login() {
+     void login() {
         try {
             Parent loginRoot = FXMLLoader.load(getClass().getResource("login.fxml"));
 
             Stage stage = (Stage) back2login.getScene().getWindow();
             stage.setScene(new Scene(loginRoot));
-            stage.setTitle("Login");
+            stage.setTitle("Login"); 
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to load the login interface.");
@@ -92,7 +96,7 @@ public class SignupController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SellerHomePage.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) signup.getScene().getWindow();
+            Stage stage = (Stage) signup.getScene().getWindow(); 
             stage.setScene(new Scene(root));
             stage.setTitle("Seller Home Page");
             stage.show();
@@ -101,12 +105,13 @@ public class SignupController {
             showAlert(Alert.AlertType.ERROR, "Loading Failed", "Error loading Seller Home Page: " + e.getMessage());
         }
     }
-
     private String authenticateUser(String username, String password) {
         String querySeller = "SELECT sellerId FROM seller WHERE sellerName = ? AND password = ?";
         String queryCustomer = "SELECT customerId FROM customer WHERE customerName = ? AND password = ?";
 
-        try (Connection connection = database.connectDB(); PreparedStatement statementSeller = connection.prepareStatement(querySeller); PreparedStatement statementCustomer = connection.prepareStatement(queryCustomer)) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement statementSeller = connection.prepareStatement(querySeller);
+             PreparedStatement statementCustomer = connection.prepareStatement(queryCustomer)) {
 
             // Check in seller table
             statementSeller.setString(1, username);
@@ -116,7 +121,7 @@ public class SignupController {
             if (resultSetSeller.next()) {
                 int sellerId = resultSetSeller.getInt("sellerId");
                 UserId.setSellerId(sellerId); // Store the sellerId in the UserId class
-                return "seller";
+                return "seller"; 
             }
 
             // Check in customer table
@@ -127,15 +132,16 @@ public class SignupController {
             if (resultSetCustomer.next()) {
                 int customerId = resultSetCustomer.getInt("customerId");
                 UserId.setCustomerId(customerId); // Store the customerId in the UserId class
-                return "customer";
+                return "customer"; 
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return null; 
     }
 
+    
     private void loadCustomerHomePage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerHomePage.fxml"));
@@ -149,7 +155,7 @@ public class SignupController {
             showAlert(Alert.AlertType.ERROR, "Loading Failed", "Error loading Customer Home Page: " + e.getMessage());
         }
     }
-
+    
     private boolean validateInputs(String username, String email, String password, String accountTypeSelection) {
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || accountTypeSelection == null) {
             showAlert(Alert.AlertType.ERROR, "Validation Error", "All fields are required.");
@@ -162,8 +168,8 @@ public class SignupController {
         }
 
         if (!isValidPassword(password)) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error",
-                    "Password must be at least 8 characters long and contain a mix of upper and lower case letters, numbers, and special characters.");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", 
+                      "Password must be at least 8 characters long and contain a mix of upper and lower case letters, numbers, and special characters.");
             return false;
         }
 
@@ -182,7 +188,8 @@ public class SignupController {
 
     private void saveSellerToDatabase(String username, String email, String password, String storeName) {
         String insertSellerSQL = "INSERT INTO seller (sellerName, email, password, accountType, storeName) VALUES (?, ?, ?, ?, ?)";
-        try (Connection connection = database.connectDB(); PreparedStatement statement = connection.prepareStatement(insertSellerSQL)) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(insertSellerSQL)) {
 
             statement.setString(1, username);
             statement.setString(2, email);
@@ -198,7 +205,7 @@ public class SignupController {
                 ResultSet resultSet = queryStatement.executeQuery();
                 if (resultSet.next()) {
                     int id = resultSet.getInt("sellerId");
-                    UserId.setSellerId(id);
+                    UserId.setSellerId(id); 
                 }
             }
 
@@ -210,7 +217,8 @@ public class SignupController {
 
     private void saveCustomerToDatabase(String username, String email, String password) {
         String insertCustomerSQL = "INSERT INTO customer (customerName, email, password, accountType) VALUES (?, ?, ?, ?)";
-        try (Connection connection = database.connectDB(); PreparedStatement statement = connection.prepareStatement(insertCustomerSQL)) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(insertCustomerSQL)) {
 
             statement.setString(1, username);
             statement.setString(2, email);
@@ -243,16 +251,17 @@ public class SignupController {
         }
     }
 
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
     @FXML
     public void exit() {
         System.exit(0);
 
     }
 }
+

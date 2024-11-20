@@ -34,7 +34,7 @@
                <children>
                   <ImageView fx:id="plantImage" fitHeight="70.0" fitWidth="58.0" layoutX="21.0" layoutY="11.0" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@pics/Monster_Deliciosa_-_x-_plantshopme-removebg-preview-removebg-preview%20(1).png" />
+                        <Image url="@Screenshot_2024-10-28_214424-removebg-preview%20(1).png" />
                      </image>
                   </ImageView>
                </children>

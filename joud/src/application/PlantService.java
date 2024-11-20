@@ -6,12 +6,15 @@ import java.util.List;
 
 public class PlantService {
 
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/local_bloom_ranad"; 
+    private static final String DB_USER = "root"; 
+    private static final String DB_PASSWORD = "Rr120178593!"; 
     public static List<Plant> getPlantsForCustomer(int customerId) {
     	List<Plant> plants = new ArrayList<>(); 
     	String query = "SELECT p.plantId, p.plantName, p.characteristics, p.careInfo, p.price, p.quantity, p.image, " 
-    	+ "p.fertilization_list" + "FROM plant p " + "INNER JOIN plantcollection pc ON p.plantId = pc.plantId " 
+    	+ "p.fertilization_list " + "FROM plant p " + "INNER JOIN plantcollection pc ON p.plantId = pc.plantId " 
     			+ "WHERE pc.customerId = ? " + "GROUP BY p.plantId"; 
-    	try (Connection connection = database.connectDB();
+    	try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     			PreparedStatement statement = connection.prepareStatement(query)) {
     		statement.setInt(1, customerId); 
     		try (ResultSet resultSet = statement.executeQuery()) { 

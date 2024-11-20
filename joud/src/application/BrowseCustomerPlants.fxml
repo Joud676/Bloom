@@ -26,17 +26,10 @@
 					<children>
 						<HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);">
 							<children>
-                  			            <Button fx:id="back" mnemonicParsing="false" onAction="#onClick_button" style="-fx-background-radius: 30; -fx-background-color: transparent; -fx-cursor: hand;">
+                  			            <Button fx:id="back" mnemonicParsing="false" onAction="#onClick_button" style="-fx-background-radius: 30; -fx-background-color: #f7f7ed; -fx-cursor: hand;" text="&lt;-">
                            <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@pics/backIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></Button>
+                              <Insets left="10.0" />
+                           </HBox.margin></Button>
 								<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="202.0" text="Plant Market" textAlignment="CENTER" textFill="WHITE">
 									<font>
 										<Font name="Calibri Bold" size="16.0" />
@@ -45,14 +38,14 @@
                               <Insets />
                            </HBox.margin>
 								</Label>
-                        <Button fx:id="checkoutBtn" mnemonicParsing="false" onAction="#checkoutAction" prefHeight="23.0" prefWidth="30.0" style="-fx-background-color: transparent; -fx-cursor: hand; -fx-background-radius: 30;">
+                        <Button fx:id="checkoutBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="30.0" style="-fx-background-color: #f7f7ed; -fx-cursor: hand; -fx-background-radius: 30;">
                            <HBox.margin>
-                              <Insets bottom="2.0" left="10.0" top="2.0" />
+                              <Insets bottom="2.0" left="5.0" top="2.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="21.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@pics/CartPage.png" />
+                                    <Image url="@shopping.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -82,7 +75,7 @@
 										</VBox>
 										<ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
 											<image>
-												<Image url="@pics/car.png" />
+												<Image url="@car.png" />
 											</image>
 										</ImageView>
 									</children>
@@ -110,7 +103,7 @@
 										</VBox>
 										<ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
 											<image>
-												<Image url="@pics/watch.png" />
+												<Image url="@watch.png" />
 											</image>
                                  <HBox.margin>
                                     <Insets right="5.0" />
@@ -170,9 +163,9 @@
 			<top>
 				<Pane prefHeight="30.0" prefWidth="338.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" BorderPane.alignment="CENTER">
 					<children>
-						<ImageView fitHeight="32.0" fitWidth="294.0" layoutX="11.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="32.0" fitWidth="313.0" layoutX="-6.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@pics/Status%20bar.png" />
+								<Image url="@Status%20bar.png" />
 							</image>
 						</ImageView>
 					</children>
@@ -183,7 +176,7 @@
 					<children>
 						<ImageView fitHeight="15.0" fitWidth="186.0" layoutX="59.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@pics/Home%20Indicator.png" />
+								<Image url="@Home%20Indicator.png" />
 							</image>
 						</ImageView>
 					</children>
