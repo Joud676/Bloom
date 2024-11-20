@@ -1,6 +1,4 @@
-package bloom.plantshop;
-
-
+package application;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,77 +6,72 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
+import java.awt.TextField;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.lang.classfile.components.ClassPrinter.Node;
 
 import javafx.event.ActionEvent;
 
 public class PlantDetailsController {
+	@FXML
+    private Button Fertilization_Button;
 
     @FXML
-    private AnchorPane mainPan;
-
-    @FXML
-    private Pane main_par;
+    private Label PlantName;
 
     @FXML
     private Button back_Button;
 
     @FXML
-    private Button setting_button;
+    private Text careText;
 
     @FXML
-    private Button cart_button;
+    private Text infoText;
 
     @FXML
-    private Button Home_button;
+    private AnchorPane mainPan;
 
     @FXML
-    private Text waterNeed_TextField;
-
-    @FXML
-    private Text tempNeed_TextField;
-
-    @FXML
-    private Text sunNeed_TextField;
-
-    @FXML
-    private Text plantInfor_TextField;
-
-    @FXML
-    private Text plantInfor_TextField1;
-
-    @FXML
-    private Text plantInfor_TextField11;
-
-
-    @FXML
-    void onClick_button(ActionEvent event) {
-    	try {
-            // Load the previous view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerHomePage.fxml"));
-            Parent root = loader.load();
-            
-            // Get current stage from the event
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            
-            // Set the scene to the previous page
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void initialize() {
-      
-    }
-
+    private ImageView plantImage;
+    private Plant currentPlant; // Hold the current plant data 
+    public void setPlantData(Plant plant) { 
+    	this.currentPlant = plant; // Save the plant object 
+    	PlantName.setText(plant.getName());
+    	infoText.setText(plant.getCharacteristic()); 
+    	careText.setText(plant.getCareInfo()); 
+    	byte[] imageBytes = plant.getImage();
+    	ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes); 
+    	Image image = new Image(bis); plantImage.setImage(image);
+    	} 
+    @FXML 
+    void move_to_Fertilization(ActionEvent event) { 
+    	try { FXMLLoader loader = new FXMLLoader(getClass().getResource("FertilizationPage.fxml")); 
+    	Parent root = loader.load(); 
+    	Fertilization_Controller fertilizationController = loader.getController();
+    	fertilizationController.setFertilizationData(currentPlant); // Pass the current plant 
+    	Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); 
+    	stage.setScene(new Scene(root)); stage.show(); } catch (IOException e) { e.printStackTrace(); 
+    	
+    	} } 
+    
+    
+    @FXML void onClick_button(ActionEvent event) { 
+    	try { FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerHomePage.fxml")); 
+    	Parent root = loader.load(); CustomerHomePageController controller = loader.getController();
+    	int customerId = UserId.getCustomerId(); 
+    	System.out.print(customerId + " in the plant details");
+    	controller.setCustomerId(customerId); 
+    	Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+    	stage.setScene(new Scene(root)); stage.show(); } 
+    	catch (IOException e) { e.printStackTrace(); 
+    	} }
+    	
+    
 }

@@ -1,4 +1,4 @@
-package bloom.plantshop;
+package application;
 
 public class UserId {
     private static Integer sellerId;

@@ -1,4 +1,4 @@
-package bloom.plantshop;
+package application;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;

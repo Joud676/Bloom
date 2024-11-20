@@ -1,4 +1,4 @@
-package bloom.plantshop;
+package application;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -18,39 +19,37 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import javafx.scene.control.ScrollPane;
 
 public class CustomerHomePageController {
-	  
-    private final String DB_URL = "jdbc:mysql://localhost:3306/bloom";
-    private final String DB_USER = "root";
-    private final String DB_PASSWORD = "100398";
+	 // الخطا هنا انه لازم الداتا الي رجعت من الداتا بيز تروح تتخزن في كلاس البلانت عشان لمن الكارد كنتلرولر يحط البيانات في الكارد  عشان
+	// يروح ياخدها من كلاس البلانت مو من الداتا بيز 
+	
+	
+	//attribute for the customer
+		int customerId;
 
-    @FXML
-    private Button Button_plant;
+		List<Plant> plants = PlantService.getPlantsForCustomer(customerId);
+		
+		public void setCustomerId(int customerId) {
+			
+			    this.customerId = customerId;
+			    plants = PlantService.getPlantsForCustomer(customerId); // Load plants for this customer
+			    
+			    // Clear existing plant cards and load them again
+			    vboxContainer.getChildren().clear();
+			    loadPlantCards();
 
-    @FXML
-    private Button show_Plant2;
+		}
+	
 
-    @FXML
-    private Button show_Plant3;
-    @FXML
-    private Button Button_plant1;
-
-    @FXML
-    private Button Button_plant2;
-
-    @FXML
-    private Button Button_plant3;
-    
     @FXML
     private Button Home_button;
-
-    @FXML
-    private Button back_Button;
 
     @FXML
     private Button cart_button;
@@ -60,6 +59,12 @@ public class CustomerHomePageController {
 
     @FXML
     private Pane main_par;
+
+    @FXML
+    private Button newPlant_Button;
+
+    @FXML
+    private ScrollPane scrollPane;
 
     @FXML
     private Button search_Button;
@@ -72,8 +77,37 @@ public class CustomerHomePageController {
 
     @FXML
     private Button setting_button;
+
     @FXML
-    private Button buyButton;
+    private VBox vboxContainer;
+    
+    @FXML
+    private ImageView profileImg;
+    
+    @FXML
+    private ImageView profile;
+    
+    public void loadPlantCards() {
+        try {
+           vboxContainer.getChildren().clear(); // Clear existing cards if necessary
+
+            for (Plant plant : plants) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("PlantCard.fxml"));
+                AnchorPane plantCard = loader.load();
+              
+                System.out.println(plant+"in the load method");
+
+                // Get the controller for this card and set data
+                PlantCardController controller = loader.getController();
+                controller.setPlantData(plant);
+
+                // Add the card to the VBox
+                vboxContainer.getChildren().add(plantCard);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     @FXML
     void move_to_viewPlant(ActionEvent event) {
@@ -112,18 +146,26 @@ public class CustomerHomePageController {
     }
     
     @FXML
-    void buyPlant(ActionEvent event) {
+    void moveTo_Market(ActionEvent event) {
     	try {
+    		  // Load the FXML file for the BrowseCustomerPlants page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BrowseCustomerPlants.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) ((Scene) buyButton.getScene()).getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Buy Plant");
+            // Get the current stage (window) and set the new scene
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
             stage.show();
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Loading Failed", "Error loading Buy Plant Page: " + e.getMessage());
-        }    }
+    	} catch (Exception e) {
+    	    Alert alert = new Alert(Alert.AlertType.ERROR);
+    	    alert.setTitle("Loading Failed");
+    	    alert.setHeaderText("Error loading Buy Plant Page");
+    	    alert.setContentText(e.getMessage());
+    	    alert.showAndWait();
+    	    e.printStackTrace();  // This will print the stack trace for more details
+    	}
+ }
     
     @FXML
     void search(ActionEvent event) {
@@ -131,7 +173,7 @@ public class CustomerHomePageController {
     	String plantName = search_text_Field.getText().toLowerCase();
         String query = "SELECT * FROM plants WHERE LOWER(name) = ?";
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = database.connectDB();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, plantName);
@@ -149,12 +191,16 @@ public class CustomerHomePageController {
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error occurred while searching for the plant.", "Error", JOptionPane.ERROR_MESSAGE);
-        
-
-    }
+    }}
+    
+     @FXML  
+     void toProfile() {
+    	 Stage stage = (Stage) newPlant_Button.getScene().getWindow();
+         Navigation.navigateTo("CustomerProfile.fxml", stage);   
+     }
 
 }
-}
+
 
 
 

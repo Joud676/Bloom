@@ -8,17 +8,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="294.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bloom.plantshop.StartController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="294.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StartController">
    <children>
       <Circle fill="#607f41" layoutX="148.0" layoutY="433.0" radius="168.0" stroke="WHITE" strokeType="INSIDE" />
       <ImageView fitHeight="190.0" fitWidth="198.0" layoutX="52.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Bloom Logo.jpg" />
+            <Image url="@pics/Bloom%20Logo.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="35.0" fitWidth="300.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Status bar.png" />
+            <Image url="@pics/Status%20bar.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="35.0" fitWidth="238.0" layoutX="29.0" layoutY="474.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
@@ -26,12 +26,12 @@
             <Image url="@Home Indicator.png" />
          </image>
       </ImageView>
-      <Text fill="#607f41" layoutX="28.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Where every plant finds its home!">
+      <Text fill="#607f41" layoutX="28.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Where every plant finds its home!" wrappingWidth="238.0">
          <font>
-            <Font name="Berlin Sans FB Bold" size="15.0" />
+            <Font name="Candara Bold" size="16.0" />
          </font>
       </Text>
-      <Button fx:id="startButton" layoutX="69.0" layoutY="360.0" mnemonicParsing="false" onAction="#getStarted" prefHeight="38.0" prefWidth="142.0" style="-fx-background-radius: 90; -fx-cursor: hand;" text="Get Started!" textFill="#607f41">
+      <Button fx:id="startButton" layoutX="69.0" layoutY="360.0" mnemonicParsing="false" onAction="#getStarted" prefHeight="38.0" prefWidth="142.0" style="-fx-background-radius: 90; -fx-cursor: hand; -fx-background-color: #d3deb8;" text="Get Started!" textFill="#607f41">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bloom.plantshop.BrowsePlantsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BrowsePlantsController">
 	<children>
 		<BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<center>
@@ -23,8 +23,15 @@
 					<children>
 						<HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);">
 							<children>
-                  			            <Button fx:id="back" mnemonicParsing="false" onAction="#onClick_button" style="-fx-background-radius: 30; -fx-cursor: hand;" text="&lt;-" />
-								<Label alignment="CENTER" prefHeight="20.0" prefWidth="179.0" text="                  My Plants" textAlignment="CENTER" textFill="WHITE">
+                  			            <Button fx:id="back" mnemonicParsing="false" onAction="#onClick_button" style="-fx-background-radius: 30; -fx-cursor: hand; -fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@pics/backIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+								<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="139.0" text="                  My Plants" textAlignment="CENTER" textFill="WHITE">
 									<font>
 										<Font name="Cambria Bold" size="15.0" />
 									</font>
@@ -39,7 +46,7 @@
             							<children>
             								<TextField fx:id="searchTextField" prefHeight="25.0" prefWidth="168.0" promptText=" search for plant here" stylesheets="@../../../../../../bin/bloom/plantshop/style.css">
             									<HBox.margin>
-            										<Insets left="20.0" />
+            										<Insets left="10.0" />
             									</HBox.margin>
             									<font>
             										<Font size="10.0" />
@@ -49,7 +56,10 @@
             										<String fx:value="secarch-box" />
             									</styleClass>
             								</TextField>
-            								<Button fx:id="searchButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#searchPlant" styleClass="secarch-button" stylesheets="@../../../../../../bin/bloom/plantshop/style.css" text="search" textFill="WHITE" />
+            								<Button fx:id="searchButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#searchPlant" styleClass="secarch-button" stylesheets="@style%20(1).css" text="search" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin></Button>
             							</children>
             							<styleClass>
             								<String fx:value="secarch-box" />
@@ -73,7 +83,11 @@
 											<children>
 												<ImageView fx:id="image1" fitHeight="89.0" fitWidth="85.0" layoutX="2.0" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" />
 												<Label fx:id="text1" layoutX="75.0" layoutY="6.0" text=" " />
-												<ImageView fx:id="cart1" fitHeight="24.0" fitWidth="18.0" layoutX="111.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true" />
+												<ImageView fx:id="cart1" fitHeight="24.0" fitWidth="18.0" layoutX="111.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@pics/shopping.png" />
+													</image>
+												</ImageView>
 												<Label fx:id="price1" layoutX="75.0" layoutY="66.0" prefHeight="15.0" prefWidth="32.0" />
 											</children>
 										</Pane>
@@ -82,7 +96,11 @@
 												<ImageView fx:id="image2" fitHeight="89.0" fitWidth="89.0" layoutX="-1.0" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" />
 												<Label fx:id="text2" layoutX="75.0" layoutY="6.0" />
 												<Label fx:id="price2" layoutX="73.0" layoutY="66.0" prefHeight="15.0" prefWidth="32.0" />
-												<ImageView fx:id="cart2" fitHeight="24.0" fitWidth="18.0" layoutX="110.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true" />
+												<ImageView fx:id="cart2" fitHeight="24.0" fitWidth="18.0" layoutX="110.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@pics/shopping.png" />
+													</image>
+												</ImageView>
 											</children>
 										</Pane>
 									</children>
@@ -95,14 +113,22 @@
 												<ImageView fx:id="image3" fitHeight="76.0" fitWidth="70.0" layoutX="-1.0" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" />
 												<Label fx:id="text3" layoutX="75.0" layoutY="6.0" />
 												<Label fx:id="price3" layoutX="71.0" layoutY="61.0" prefHeight="15.0" prefWidth="32.0" />
-												<ImageView fx:id="cart3" fitHeight="24.0" fitWidth="18.0" layoutX="110.0" layoutY="57.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true" />
+												<ImageView fx:id="cart3" fitHeight="24.0" fitWidth="18.0" layoutX="110.0" layoutY="57.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@pics/shopping.png" />
+													</image>
+												</ImageView>
 											</children>
 										</Pane>
 										<Pane prefHeight="88.0" prefWidth="159.0">
 											<children>
 												<ImageView fx:id="image4" fitHeight="87.0" fitWidth="68.0" layoutX="16.0" layoutY="2.0" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" />
 												<Label fx:id="text4" layoutX="93.0" layoutY="6.0" />
-												<ImageView fx:id="cart4" fitHeight="24.0" fitWidth="18.0" layoutX="129.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true" />
+												<ImageView fx:id="cart4" fitHeight="24.0" fitWidth="18.0" layoutX="129.0" layoutY="65.0" onMouseClicked="#AddToCart" pickOnBounds="true" preserveRatio="true">
+													<image>
+														<Image url="@pics/shopping.png" />
+													</image>
+												</ImageView>
 												<Label fx:id="price4" layoutX="93.0" layoutY="66.0" prefHeight="15.0" prefWidth="32.0" />
 											</children>
 										</Pane>
@@ -120,18 +146,18 @@
 					<children>
 						<ImageView fitHeight="40.0" fitWidth="303.0" layoutX="-6.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@Status%20bar.png" />
+								<Image url="@pics/Status%20bar.png" />
 							</image>
 						</ImageView>
 					</children>
 				</Pane>
 			</top>
 			<bottom>
-				<Pane prefHeight="22.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" stylesheets="@../../../../../../bin/bloom/plantshop/style.css" BorderPane.alignment="CENTER">
+				<Pane prefHeight="22.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" stylesheets="@style%20(1).css" BorderPane.alignment="CENTER">
 					<children>
 						<ImageView fitHeight="36.0" fitWidth="164.0" layoutX="65.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@Home%20Indicator.png" />
+								<Image url="@pics/Home%20Indicator.png" />
 							</image>
 						</ImageView>
 					</children>
