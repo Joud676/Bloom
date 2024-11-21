@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,66 +12,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPan" prefHeight="573.0" prefWidth="250.0" style="-fx-background-color: #5b8764;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plant.PlantDetailsController">
+<AnchorPane fx:id="mainPan" prefHeight="573.0" prefWidth="250.0" style="-fx-background-color: #fcfcf5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plant.PlantDetailsController">
    <children>
-      <Pane layoutX="191.0" layoutY="280.0" prefHeight="121.0" prefWidth="122.0" style="-fx-background-color: #709c89; -fx-background-radius: 15;">
+
+      <!-- Main plant details -->
+      <Pane layoutX="3.0" layoutY="57.0" prefHeight="175.0" prefWidth="304.0" style="-fx-background-color: #7a996b; -fx-background-radius: 20;">
          <children>
-            <ImageView fitHeight="76.0" fitWidth="76.0" layoutX="23.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Screenshot_2024-10-30_003332-removebg-preview%20(1).png" />
-               </image>
-            </ImageView>
-            <Text fill="WHITE" layoutX="16.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="next watering " wrappingWidth="90.5">
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </Text>
-         </children></Pane>
-      <Pane layoutY="-192.0" prefHeight="412.0" prefWidth="312.0" style="-fx-background-color: #fafcf5; -fx-background-radius: 20;" styleClass="scrollpan">
-         <children>
-            <Label fx:id="PlantName" layoutX="45.0" layoutY="259.0" prefHeight="42.0" prefWidth="152.0" text="Monstera Deliciosa" textFill="#030101">
+            <ImageView fx:id="plantImage" fitHeight="121.0" fitWidth="113.0" layoutX="194.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="PlantName" layoutX="78.0" layoutY="5.0" prefHeight="42.0" prefWidth="152.0" text="Monstera Deliciosa" textFill="#030101">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </Label>
-            <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="121.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Bloom%20Logo.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="plantImage" fitHeight="183.0" fitWidth="125.0" layoutX="193.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Monster_Deliciosa_-_x-_plantshopme-removebg-preview-removebg-preview%20(1).png" />
-               </image></ImageView>
-            <Pane layoutX="45.0" layoutY="301.0" prefHeight="18.0" prefWidth="64.0" style="-fx-background-color: #d3deb8;" styleClass="circle" stylesheets="@../styles/general.css">
-               <children>
-                  <Label layoutX="11.0" layoutY="-7.0" prefHeight="32.0" prefWidth="50.0" stylesheets="@../styles/general.css" text="Healthy" textFill="#0a6f2c">
-                     <font>
-                        <Font name="Arial" size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Button fx:id="back_Button" layoutX="5.0" layoutY="255.0" mnemonicParsing="false" onAction="#onClick_button" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: #d3deb8; -fx-background-radius: 10;">
-               <effect>
-                  <Blend />
-               </effect>
+            <Label fx:id="TimerLabel" layoutX="32.0" layoutY="75.0" prefHeight="42.0" prefWidth="142.0" text="Time " textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font size="10.0" />
+                  <Font name="System Bold Italic" size="24.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/backIcon.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <ImageView fitHeight="21.0" fitWidth="344.0" layoutX="-1.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Screenshot_2024-10-28_211727-removebg-preview.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="Fertilization_Button" layoutX="38.0" layoutY="361.0" mnemonicParsing="false" onAction="#move_to_Fertilization" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: #afc989; -fx-background-radius: 10;" text="check Fertilization" textFill="WHITE">
+            </Label>
+            <Text fill="WHITE" layoutX="52.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Next watering" wrappingWidth="102.0">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
+            <Button fx:id="Fertilization_Button" layoutX="14.0" layoutY="134.0" mnemonicParsing="false" onAction="#move_to_Fertilization" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: #afc989; -fx-background-radius: 10;" text="Check Fertilization" textFill="WHITE">
                <effect>
                   <Blend />
                </effect>
@@ -78,22 +42,36 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="back_Button" layoutX="9.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClick_button" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: #f7f7ed; -fx-background-radius: 10;" text="&lt;-">
+               <effect>
+                  <Blend />
+               </effect>
+               <font>
+                  <Font size="10.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <Text fill="WHITE" layoutX="14.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information" wrappingWidth="151.6666717529297">
+
+      <!-- Information and care -->
+      <Text layoutX="13.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information" wrappingWidth="151.6666717529297">
          <font>
             <Font name="System Bold Italic" size="19.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="14.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plant care" wrappingWidth="151.6666717529297">
+      <Text fill="#252222" layoutX="13.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plant care" wrappingWidth="151.6666717529297">
          <font>
             <Font name="System Bold Italic" size="19.0" />
          </font>
       </Text>
-      <Pane layoutX="8.0" layoutY="356.0" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: #f5f2e6; -fx-background-radius: 50;" styleClass="circle">
+      <Text fx:id="careText" layoutX="50.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Care info here..." wrappingWidth="252.0" />
+      <Text fx:id="infoText" layoutX="14.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional information..." wrappingWidth="284.0" />
+
+      <!-- Icons for care details -->
+      <Pane layoutX="14.0" layoutY="465.0" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: #f5f2e6; -fx-background-radius: 50;">
          <children>
             <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -102,7 +80,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="9.0" layoutY="297.0" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: #f5f2e6; -fx-background-radius: 50;" styleClass="circle">
+      <Pane layoutX="14.0" layoutY="385.0" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: #f5f2e6; -fx-background-radius: 50;">
          <children>
             <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -111,7 +89,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="8.0" layoutY="327.0" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: #f5f2e6; -fx-background-radius: 50;" styleClass="circle">
+      <Pane layoutX="14.0" layoutY="428.0" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: #f5f2e6; -fx-background-radius: 50;">
          <children>
             <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="2.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -120,7 +98,16 @@
             </ImageView>
          </children>
       </Pane>
-      <Text fx:id="careText" layoutX="42.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="142.0" />
-      <Text fx:id="infoText" layoutX="21.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="257.13671875" />
+      <ImageView fitHeight="42.0" fitWidth="313.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Status%20bar.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="TimerInput" layoutX="153.0" layoutY="531.0" prefHeight="26.0" prefWidth="125.0" promptText="Enter days" style="-fx-background-color: #fcfcf5;" />
+      <Button fx:id="startTimerButton" layoutX="11.0" layoutY="526.0" mnemonicParsing="false" onAction="#startTimer" prefHeight="37.0" prefWidth="133.0" style="-fx-background-color: #7a996b; -fx-background-radius: 15;" text="Start Timer" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

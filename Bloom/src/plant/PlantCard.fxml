@@ -14,7 +14,7 @@
    <children>
       <Pane layoutX="21.0" layoutY="17.0" prefHeight="70.0" prefWidth="270.0" styleClass="card1" stylesheets="@../styles/general.css">
          <children>
-            <Label fx:id="PlantName" layoutX="51.0" layoutY="5.0" text="Monstera Deliciosa" textFill="WHITE">
+            <Label fx:id="PlantName" layoutX="43.0" layoutY="5.0" text="Monstera Deliciosa" textFill="WHITE">
                <font>
                   <Font name="Baskerville Old Face" size="15.0" />
                </font>
@@ -24,12 +24,12 @@
                   <Font size="8.0" />
                </font>
             </Label>
-            <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="188.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="191.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Screenshot_2024-10-29_000508-removebg-preview%20(1).png" />
                </image>
             </ImageView>
-            <Button fx:id="show_Plant1" layoutX="175.0" layoutY="44.0" mnemonicParsing="false" onAction="#move_to_viewPlant" prefHeight="6.0" prefWidth="76.0" style="-fx-background-color: #9db07b;" text="show more.." textFill="#14520b">
+            <Button fx:id="show_Plant1" layoutX="43.0" layoutY="45.0" mnemonicParsing="false" onAction="#move_to_viewPlant" prefHeight="6.0" prefWidth="76.0" style="-fx-background-color: #9db07b;" text="show more.." textFill="#14520b">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
@@ -46,9 +46,14 @@
                   <Font name="System Bold" size="8.0" />
                </font>
             </Label>
-            <ImageView fx:id="plantImage" fitHeight="70.0" fitWidth="65.0" layoutX="-28.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="plantImage" fitHeight="81.0" fitWidth="70.0" layoutX="-28.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Monster_Deliciosa_-_x-_plantshopme-removebg-preview-removebg-preview%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="238.0" layoutY="3.0" onMouseClicked="#deleteFromCollection" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../images/deleteIcon.png" />
                </image>
             </ImageView>
          </children>

@@ -22,6 +22,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
 
 public class MarketCardController implements Initializable {
 
@@ -73,12 +75,15 @@ public class MarketCardController implements Initializable {
         return new byte[]{};
     }
 
-
-
     @FXML
     void addToCart() {
         if (plantQuan.getValue() > 0) {
             Connection con = con = DatabaseConnection.connectDB();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Plant Added");
+            alert.setContentText("Plant is added to cart!");
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("/styles/dialog.css").toExternalForm());
+            alert.show();
             try {
                 PreparedStatement ps = con.prepareStatement("INSERT INTO cart (customerId, plantId, quantity) VALUES (?, ?, ?);");
                 ps.setInt(1, User.getCustomerId());
@@ -106,7 +111,17 @@ public class MarketCardController implements Initializable {
     }
 
     @FXML
-    void imageClicked() {
+    void imageClicked(MouseEvent event) {
+        String name = plant.getName();
+        double price = plant.getPrice();
+        String characteristics = plant.getCharacteristic();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Plant Information");
+        alert.setHeaderText(name);
+        alert.setContentText(String.format("Price: $%.2f\nCharacteristics: %s", price, characteristics));
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("/styles/dialog.css").toExternalForm());
+        alert.showAndWait();
 
     }
 

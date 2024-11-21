@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
@@ -15,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -49,15 +51,15 @@ public class SellerProfileController {
 
     @FXML
     private ImageView back;
-
+    Alert alert;
 
     public void initialize() {
         int sellerId = User.getSellerId();
-        loadSellerDetails(sellerId); 
-        loadPlantCount(sellerId); 
+        loadSellerDetails(sellerId);
+        loadPlantCount(sellerId);
         loadOrderCount(sellerId);
     }
-    
+
     private Connection getConnection() throws SQLException {
         return DatabaseConnection.connectDB();
     }
@@ -66,8 +68,7 @@ public class SellerProfileController {
     private void loadSellerDetails(int sellerId) {
         String sellerQuery = "SELECT storeName, sellerName FROM seller WHERE sellerId = ?";
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sellerQuery)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sellerQuery)) {
 
             statement.setInt(1, sellerId);
             ResultSet resultSet = statement.executeQuery();
@@ -86,8 +87,7 @@ public class SellerProfileController {
     private void loadPlantCount(int sellerId) {
         String plantCountQuery = "SELECT COUNT(*) AS plantCount FROM plant WHERE sellerId = ?";
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(plantCountQuery)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(plantCountQuery)) {
 
             statement.setInt(1, sellerId);
             ResultSet resultSet = statement.executeQuery();
@@ -104,8 +104,7 @@ public class SellerProfileController {
     private void loadOrderCount(int sellerId) {
         String orderCountQuery = "SELECT COUNT(*) AS orderCount FROM `order` WHERE sellerId = ?";
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(orderCountQuery)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(orderCountQuery)) {
 
             statement.setInt(1, sellerId);
             ResultSet resultSet = statement.executeQuery();
@@ -122,7 +121,8 @@ public class SellerProfileController {
     @FXML
     void back() {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
-        Navigation.navigateTo("/seller/sellerHomePage.fxml", stage);
+        Navigation.navigateTo("/seller/SellerHomePage.fxml", stage);
+
     }
 
     @FXML
@@ -138,9 +138,8 @@ public class SellerProfileController {
 
         String updateUsername = "UPDATE seller SET sellerName = ? WHERE sellerId = ?";
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateUsername)) {
-             
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(updateUsername)) {
+
             statement.setString(1, newUsername);
             statement.setInt(2, User.getSellerId());
 
@@ -170,20 +169,19 @@ public class SellerProfileController {
         }
 
         if (!isValidPassword(newPassword)) {
-            showAlert("Error", "Validation Error", 
-                "Password must be at least 8 characters long and contain a mix of upper and lower case letters, numbers, and special characters.", Alert.AlertType.ERROR);
+            showAlert("Error", "Validation Error",
+                    "Password must be at least 8 characters long and contain a mix of upper and lower case letters, numbers, and special characters.", Alert.AlertType.ERROR);
             return; // Show alert and stop further execution
         }
 
         String updatePassword = "UPDATE seller SET password = ? WHERE sellerId = ?";
 
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(updatePassword)) {
-             
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(updatePassword)) {
+
             statement.setString(1, newPassword);
             statement.setInt(2, User.getSellerId());
             int rowsUpdated = statement.executeUpdate();
-            
+
             if (rowsUpdated > 0) {
                 showAlert("Success", "Password Updated", "Your password has been successfully updated.", Alert.AlertType.INFORMATION);
             }
@@ -199,15 +197,14 @@ public class SellerProfileController {
         return Pattern.matches(passwordRegex, password);
     }
 
+    private void showAlert(String title, String header, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
-     private void showAlert(String title, String header, String content, Alert.AlertType alertType) {
-         Alert alert = new Alert(alertType);
-         alert.setTitle(title);
-         alert.setHeaderText(header);
-         alert.setContentText(content);
-         alert.showAndWait(); 
-     }
-   
     String dialog(String title, String header, String content) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);
@@ -215,7 +212,7 @@ public class SellerProfileController {
         dialog.setContentText(content);
 
         dialog.getDialogPane().getStylesheets().add(
-            getClass().getResource("/styles/dialog.css").toExternalForm()
+                getClass().getResource("/styles/dialog.css").toExternalForm()
         );
         dialog.getDialogPane().setGraphic(null);
 
@@ -223,25 +220,30 @@ public class SellerProfileController {
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
         stage.initStyle(StageStyle.UNDECORATED);
         dialog.showAndWait().ifPresent(response -> {
-        	newPassword.set(response);
+            newPassword.set(response);
         });
-       
 
         return newPassword.get();
     }
 
-
     @FXML
     void toPurchaseHistory(ActionEvent event) {
-        // Add navigation logic to Purchase History page
+        Stage currentStage = (Stage) logoutButton.getScene().getWindow();
+        Navigation.navigateTo("/seller/ViewSellerHistory.fxml", currentStage);
     }
 
     @FXML
     void logout(ActionEvent event) {
-        Stage stage = (Stage) logoutButton.getScene().getWindow();
-        Navigation.navigateTo("/operations/StartingPage.fxml", stage);    
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Logout");
+        alert.setContentText("Are you sure you want to log out?");
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("/styles/dialog.css").toExternalForm());
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+            Navigation.navigateTo("/operations/StartingPage.fxml", stage);
+        }
     }
 
-   
 }
-

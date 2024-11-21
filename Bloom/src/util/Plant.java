@@ -32,7 +32,7 @@ public class Plant {
     }
 
     // Constructor for browsing
-    public Plant(byte[] browseImage, String browseName, String browseCharacteristic, double browsePrice,int id,int qun) {
+    public Plant(byte[] browseImage, String browseName, String browseCharacteristic, double browsePrice, int id, int qun) {
         this(id, browseName, browseCharacteristic, null, browsePrice, qun, null, browseImage);
     }
 
@@ -112,8 +112,8 @@ public class Plant {
         }
         List<String> fertilization1 = plant1.getFertilization();
         List<String> fertilization2 = plant2.getFertilization();
-        if (fertilization1 != null && fertilization2 != null &&
-            fertilization1.contains(plant2.getName()) && fertilization2.contains(plant1.getName())) {
+        if (fertilization1 != null && fertilization2 != null
+                && fertilization1.contains(plant2.getName()) && fertilization2.contains(plant1.getName())) {
             return "The plants " + plant1.getName() + " and " + plant2.getName() + " can be fertilized together.";
         } else {
             return "The plants " + plant1.getName() + " and " + plant2.getName() + " cannot be fertilized together.";
@@ -122,12 +122,42 @@ public class Plant {
 
     @Override
     public String toString() {
-        return "Plant ID: " + plantId + "\n" +
-               "Name: " + name + "\n" +
-               "Characteristics: " + characteristic + "\n" +
-               "Care Information: " + careInfo + "\n" +
-               "Price: " + price + "\n" +
-               "Quantity: " + quantity + "\n" +
-               "Fertilization: " + (fertilization != null ? String.join(", ", fertilization) : "None");
+        return "Plant ID: " + plantId + "\n"
+                + "Name: " + name + "\n"
+                + "Characteristics: " + characteristic + "\n"
+                + "Care Information: " + careInfo + "\n"
+                + "Price: " + price + "\n"
+                + "Quantity: " + quantity + "\n"
+                + "Fertilization: " + (fertilization != null ? String.join(", ", fertilization) : "None");
     }
+// timer 
+
+    private java.sql.Timestamp lastWatered;
+    private int wateringIntervalHours;
+
+    public long getRemainingTime() {
+        if (lastWatered == null || wateringIntervalHours <= 0) {
+            return 0;
+        }
+        long elapsedTime = System.currentTimeMillis() - lastWatered.getTime();
+        long totalIntervalMillis = wateringIntervalHours * 60L * 60 * 1000;
+        return Math.max(0, totalIntervalMillis - elapsedTime) / 1000;
+    }
+
+    public java.sql.Timestamp getLastWatered() {
+        return lastWatered;
+    }
+
+    public void setLastWatered(java.sql.Timestamp lastWatered2) {
+        this.lastWatered = lastWatered2;
+    }
+
+    public int getWateringIntervalHours() {
+        return wateringIntervalHours;
+    }
+
+    public void setWateringIntervalHours(int wateringIntervalHours) {
+        this.wateringIntervalHours = wateringIntervalHours;
+    }
+
 }

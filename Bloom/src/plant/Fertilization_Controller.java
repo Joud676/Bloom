@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -39,6 +40,12 @@ public class Fertilization_Controller {
     private ImageView plantImage;
 
     private Plant selectedPlant; // The plant passed from the previous page
+    @FXML
+    private AnchorPane mainPan;
+    @FXML
+    private ImageView plantImage1;
+    @FXML
+    private Label PlantName1;
 
     
     public void setFertilizationData(Plant selectedPlant) {
@@ -62,7 +69,9 @@ public class Fertilization_Controller {
 
         // Validate the input
         if (plant2Name.isEmpty()) {
+            
             Result_Of_Fertilizastion.setText("Please enter a plant name.");
+            selectedPlant.getFertilization().contains(plant2Name);
             return;
         }
 

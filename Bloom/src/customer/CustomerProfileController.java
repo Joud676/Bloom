@@ -1,5 +1,6 @@
 package customer;
 
+import java.io.IOException;
 import util.Navigation;
 import util.User;
 import util.DatabaseConnection;
@@ -7,13 +8,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -51,6 +57,8 @@ public class CustomerProfileController {
 
     @FXML
     private ImageView cartIcon;
+
+    Alert alert;
 
     public void initialize() {
         int customerId = User.getCustomerId();
@@ -99,8 +107,19 @@ public class CustomerProfileController {
 
     @FXML
     private void back() {
-        Stage stage = (Stage) logoutButton.getScene().getWindow();
-        Navigation.navigateTo("/customer/CustomerHomePage.fxml", stage);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer/CustomerHomePage.fxml"));
+            Parent root = loader.load();
+            CustomerHomePageController controller = loader.getController();
+            int customerId = User.getCustomerId();
+            controller.setCustomerId(customerId);
+            Stage stage = (Stage) ((javafx.scene.Node) logoutButton).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
@@ -206,12 +225,21 @@ public class CustomerProfileController {
 
     @FXML
     private void toPurchaseHistory() {
-        // Logic to navigate to the purchase history screen
+        Stage currentStage = (Stage) logoutButton.getScene().getWindow();
+        Navigation.navigateTo("/customer/ViewCustomerHistory.fxml", currentStage);
     }
 
     @FXML
     private void logout() {
-        Stage stage = (Stage) logoutButton.getScene().getWindow();
-        Navigation.navigateTo("/operations/StartingPage.fxml", stage);
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Logout");
+        alert.setContentText("Are you sure you want to log out?");
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("/styles/dialog.css").toExternalForm());
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+            Navigation.navigateTo("/operations/StartingPage.fxml", stage);
+        }
     }
 }

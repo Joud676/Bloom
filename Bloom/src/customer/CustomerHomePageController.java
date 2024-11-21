@@ -30,32 +30,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
+import util.User;
 
 public class CustomerHomePageController {
     // الخطا هنا انه لازم الداتا الي رجعت من الداتا بيز تروح تتخزن في كلاس البلانت عشان لمن الكارد كنتلرولر يحط البيانات في الكارد  عشان
     // يروح ياخدها من كلاس البلانت مو من الداتا بيز 
 
-    //attribute for the customer
-    int customerId;
-
-    List<Plant> plants = PlantService.getPlantsForCustomer(customerId);
-
-    public void setCustomerId(int customerId) {
-
-        this.customerId = customerId;
-        plants = PlantService.getPlantsForCustomer(customerId); // Load plants for this customer
-
-        // Clear existing plant cards and load them again
-        vboxContainer.getChildren().clear();
-        loadPlantCards();
-
-    }
-
-    @FXML
     private Button Home_button;
-
-    @FXML
-    private Button cart_button;
 
     @FXML
     private AnchorPane mainPan;
@@ -72,14 +54,7 @@ public class CustomerHomePageController {
     @FXML
     private Button search_Button;
 
-    @FXML
     private TextField search_text_Field;
-
-    @FXML
-    private Pane searchpan;
-
-    @FXML
-    private Button setting_button;
 
     @FXML
     private VBox vboxContainer;
@@ -87,8 +62,30 @@ public class CustomerHomePageController {
     @FXML
     private ImageView profileImg;
 
+    //attribute for the customer
+    int customerId;
+
+    List<Plant> plants;
     @FXML
-    private ImageView profile;
+    private ImageView cart;
+    @FXML
+    private ImageView profileIcon;
+
+    void initialize() {
+        Navigation.setLastPage("/customer/CustomerHomePage.fxml");
+
+    }
+
+    public void setCustomerId(int customerId) {
+
+        this.customerId = customerId;
+        plants = PlantService.getPlantsForCustomer(customerId); // Load plants for this customer
+
+        // Clear existing plant cards and load them again
+        vboxContainer.getChildren().clear();
+        loadPlantCards();
+
+    }
 
     public void loadPlantCards() {
         try {
@@ -112,12 +109,10 @@ public class CustomerHomePageController {
         }
     }
 
-    @FXML
     void move_to_viewPlant(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/plant/PlantDetails.fxml"));
             Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -127,10 +122,20 @@ public class CustomerHomePageController {
         }
     }
 
-    @FXML
     void onClick_button(ActionEvent event) {
-        Stage stage = (Stage) vboxContainer.getScene().getWindow();
-        Navigation.navigateTo("/customer/CustomerHomePage.fxml", stage);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer/CustomerHomePage.fxml"));
+            Parent root = loader.load();
+            CustomerHomePageController controller = loader.getController();
+            int customerId = User.getCustomerId();
+            System.out.print(customerId + " in the plant details");
+            controller.setCustomerId(customerId);
+            Stage stage = (Stage) ((javafx.scene.Node) Home_button).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -153,6 +158,7 @@ public class CustomerHomePageController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Loading Failed");
             alert.setHeaderText("Error loading Buy Plant Page");
@@ -192,6 +198,12 @@ public class CustomerHomePageController {
     void toProfile() {
         Stage stage = (Stage) newPlant_Button.getScene().getWindow();
         Navigation.navigateTo("/customer/CustomerProfile.fxml", stage);
+    }
+
+    @FXML
+    void toCart() {
+        Stage currentStage = (Stage) newPlant_Button.getScene().getWindow();
+        Navigation.navigateTo("/customer/CheckoutPage.fxml", currentStage);
     }
 
 }

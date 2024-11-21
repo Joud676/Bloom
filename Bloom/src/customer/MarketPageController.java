@@ -53,6 +53,7 @@ public class MarketPageController {
     PreparedStatement statement;
 
     public void initialize() {
+        Navigation.setLastPage("/customer/MarketPage.fxml");
         try {
             displayPlantCard();
         } catch (Exception e) {
@@ -79,7 +80,6 @@ public class MarketPageController {
                 int id = resultSet.getInt("plantId");
                 int qun = resultSet.getInt("quantity");
                 plant = new Plant(imageBytes, plantName, characteristics, price, id, qun);
-                System.out.println(plant);
                 browseData.add(plant); // Add plant to the list
             }
 

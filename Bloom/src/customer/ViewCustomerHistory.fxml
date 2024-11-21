@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.ViewCustomerHistoryController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <!-- VBox is centered within the BorderPane -->
+                <VBox alignment="CENTER" prefHeight="554.0" prefWidth="294.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <!-- Static content: Header and Search bar -->
+                        <HBox alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);">
+                            <children>
+                                <ImageView fx:id="back" fitHeight="30.0" fitWidth="61.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 30, 0.2, 0, 2); -fx-cursor: hand;">
+                                    <image>
+                                        <Image url="@../images/backIcon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label alignment="CENTER" prefHeight="43.0" prefWidth="179.0" text="                  History" textAlignment="CENTER" textFill="WHITE">
+                                    <font>
+                                        <Font name="Cambria Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+
+                        <!-- ScrollPane for dynamic content (Plant items) -->
+                        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="436.0" prefWidth="294.0">
+                            <content>
+                                <VBox fx:id="plantContainer" prefHeight="420.0" prefWidth="293.0" />
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </VBox>
+            </center>
+
+            <!-- Top bar (Status bar) -->
+            <top>
+                <Pane prefHeight="29.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fitHeight="107.0" fitWidth="303.0" layoutX="-6.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Status%20bar.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+            </top>
+
+            <!-- Bottom bar (Home indicator) -->
+            <bottom>
+                <Pane prefHeight="22.0" prefWidth="294.0" style="-fx-background-color: linear-gradient(from 0% 10% to 100% 100%, #607f41, #3e6a13);" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fitHeight="36.0" fitWidth="164.0" layoutX="65.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Home%20Indicator.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+            </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>

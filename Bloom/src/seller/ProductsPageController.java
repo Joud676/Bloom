@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -50,10 +49,10 @@ public class ProductsPageController {
     private Label price3;
     @FXML
     private Label price4;
-    
+
     @FXML
     private Button checkoutButton;
-    
+
     @FXML
     private Button back;
 
@@ -67,7 +66,7 @@ public class ProductsPageController {
             loadPlants();
             checkPlantQuantities(); // Check plant quantities after loading plants
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 
@@ -122,7 +121,7 @@ public class ProductsPageController {
     private void setPlantDetails(byte[] buf, String plantName, double price, ImageView imageView, Label plantNameLabel, Label priceLabel) {
         plantNameLabel.setText(plantName != null ? plantName : "Unknown Plant");
 
-        priceLabel.setText(String.format("%.2f", price));
+        priceLabel.setText(String.format("$%.2f", price));
 
         if (buf != null) {
             InputStream inputStream = new ByteArrayInputStream(buf);
@@ -132,7 +131,7 @@ public class ProductsPageController {
             System.err.println("Image byte array is null for " + plantName);
         }
     }
-    
+
     private void retrieveInfo(int index) {
         String plantName = plantNames[index];
         double price = plantPrices[index];
@@ -141,7 +140,8 @@ public class ProductsPageController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Plant Information");
         alert.setHeaderText(plantName);
-        alert.setContentText("Price: " + String.format("%.2f", price) + "\nCharacteristics: " + characteristics);
+        alert.setContentText("Price: " + String.format("$%.2f", price) + "\nCharacteristics: " + characteristics);
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("/styles/dialog.css").toExternalForm());
         alert.showAndWait();
     }
 
@@ -205,7 +205,7 @@ public class ProductsPageController {
 
     @FXML
     public void searchPlant() {
-      
+
     }
 
     @FXML
@@ -215,34 +215,34 @@ public class ProductsPageController {
     @FXML
     public void AddToCart() {
     }
-    
+
     @FXML
     void onClick_button() {
 
-try {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/seller/SellerHomePage.fxml"));
-    Parent root = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/seller/SellerHomePage.fxml"));
+            Parent root = loader.load();
 
-    // Get the CustomerHomePageController
-    CustomerHomePageController controller = loader.getController();
+            // Get the CustomerHomePageController
+            CustomerHomePageController controller = loader.getController();
 
-    // Set the customer ID and call loadPlantCards again
-    int customerId = User.getCustomerId();
-    System.out.print(customerId + " in the plant details");
-    controller.setCustomerId(customerId);
+            // Set the customer ID and call loadPlantCards again
+            int customerId = User.getCustomerId();
+            System.out.print(customerId + " in the plant details");
+            controller.setCustomerId(customerId);
 
-    Stage currentStage = (Stage) back.getScene().getWindow();
+            Stage currentStage = (Stage) back.getScene().getWindow();
 
-    Scene newScene = new Scene(root);
-    currentStage.setScene(newScene);
+            Scene newScene = new Scene(root);
+            currentStage.setScene(newScene);
 
-} catch (Exception e) {
-    e.printStackTrace();
-}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 // Simplified navigation for fallback
-Stage currentStage = (Stage) back.getScene().getWindow();
-Navigation.navigateTo("/seller/SellerHomePage.fxml", currentStage);
+        Stage currentStage = (Stage) back.getScene().getWindow();
+        Navigation.navigateTo("/seller/SellerHomePage.fxml", currentStage);
 
     }
 }

@@ -4,6 +4,7 @@
  */
 package customer;
 
+import java.io.IOException;
 import util.Navigation;
 import util.User;
 import util.DatabaseConnection;
@@ -32,6 +33,9 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -40,6 +44,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import util.PlantService;
 
 /**
  * FXML Controller class
@@ -123,7 +128,7 @@ public class CheckoutPageController implements Initializable {
                         re.getInt(6)
                 ));
             }
-            System.out.println(items);
+
             itemsTable.getItems().addAll(items);
             cartTotalLbl.setText("$" + total);
 
@@ -134,17 +139,40 @@ public class CheckoutPageController implements Initializable {
 
     @FXML
     private void returnPage(MouseEvent event) {
-        if (cartPane.isVisible()) {
-            Stage currentStage = (Stage) returnPage.getScene().getWindow();
-            Navigation.navigateTo("/customer/MarketPage.fxml", currentStage);
+        if (Navigation.getLastPage().equals("/customer/MarketPage.fxml")) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer/MarketPage.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (Navigation.getLastPage().equals("/customer/CustomerHomePage.fxml")) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer/CustomerHomePage.fxml"));
+                Parent root = loader.load();
+
+                CustomerHomePageController controller = loader.getController();
+
+                int customerId = User.getCustomerId();
+                controller.setCustomerId(customerId);
+
+                // Get the current stage and set the scene
+                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             cartPane.setVisible(true);
             checkoutPane.setVisible(false);
             paymentTable.getItems().clear();
             timeChooser.getItems().clear();
-
         }
-
     }
 
     @FXML
@@ -173,13 +201,14 @@ public class CheckoutPageController implements Initializable {
         // Set the last possible day to current date + 15 days
         LocalDate maxDate = LocalDate.now().plusDays(15);
         datePicker.setDayCellFactory(dp -> new DateCell() {
+
             @Override
             public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
                 // Disable dates after maxDate
                 if (item != null && item.isAfter(maxDate)) {
                     setDisable(true);
-                    setStyle("-fx-background-color: #ffc0cb;"); // Optional: style for disabled cells
+                    setStyle("-fx-background-color: #7F7F7F;"); // Optional: style for disabled cells
                 }
             }
         });
@@ -202,8 +231,10 @@ public class CheckoutPageController implements Initializable {
                 stm.setInt(1, selectedItem.getCustomerId());
                 stm.setInt(2, selectedItem.getPlantId());
                 stm.executeUpdate();
+
             } catch (SQLException ex) {
-                Logger.getLogger(CheckoutPageController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CheckoutPageController.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -216,6 +247,7 @@ public class CheckoutPageController implements Initializable {
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Order Confirmed");
             alert.setContentText("Your order has been placed, thank you!");
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("/styles/dialog.css").toExternalForm());
             ButtonType confirmButton = new ButtonType("Confirm");
             alert.getButtonTypes().setAll(confirmButton);
             Optional<ButtonType> result = alert.showAndWait();
@@ -227,10 +259,6 @@ public class CheckoutPageController implements Initializable {
                 stm.setInt(1, User.getCustomerId());
                 stm.executeUpdate();
                 for (int i = 0; i < items.size(); i++) {
-                    PreparedStatement pstmt2 = con.prepareStatement("UPDATE plant SET quantity = quantity - ? WHERE plantId = ?");
-                    pstmt2.setInt(1, items.get(i).getQuantity());
-                    pstmt2.setInt(2, items.get(i).getPlantId());
-                    pstmt2.executeUpdate();
 
                     PreparedStatement pstmt = con.prepareStatement("INSERT INTO  bloom.order (quantity, purchaseDate, totalPrice, deliveryDate, deliveryTime, sellerId, customerId, plantId) "
                             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -244,19 +272,45 @@ public class CheckoutPageController implements Initializable {
                     pstmt.setInt(8, items.get(i).getPlantId());
                     pstmt.executeUpdate();
 
+                    PreparedStatement pstmt2 = con.prepareStatement("UPDATE plant SET quantity = quantity - ? WHERE plantId = ?");
+                    pstmt2.setInt(1, items.get(i).getQuantity());
+                    pstmt2.setInt(2, items.get(i).getPlantId());
+                    pstmt2.executeUpdate();
+
+                    PreparedStatement pstmt3 = con.prepareStatement(
+                            "INSERT INTO plantcollection (plantId, customerId, quantity) VALUES (?, ?, ?)");
+                    pstmt3.setInt(1, items.get(i).getPlantId());
+                    pstmt3.setInt(2, User.getCustomerId());
+                    pstmt3.setInt(3, items.get(i).getQuantity());
+                    pstmt3.executeUpdate();
+
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(CheckoutPageController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CheckoutPageController.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
             // user cart is sorted in items list 
             // should be added to orders table and should be added to users collection 
-            Stage currentStage = (Stage) returnPage.getScene().getWindow();
-            Navigation.navigateTo("/customer/CustomerHomePage.fxml", currentStage);
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer/CustomerHomePage.fxml"));
+                Parent root = loader.load();
+                CustomerHomePageController controller = loader.getController();
+                int customerId = User.getCustomerId();
+                System.out.print(customerId + " in the plant details");
+                controller.setCustomerId(customerId);
+                Stage stage = (Stage) ((javafx.scene.Node) returnPage).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("Please fill delivery information.");
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("/styles/dialog.css").toExternalForm());
             alert.showAndWait();
         }
     }

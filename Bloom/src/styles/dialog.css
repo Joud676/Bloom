@@ -1,29 +1,33 @@
 .dialog-pane {
-    -fx-background-color: #f6f6f6;
     -fx-border-color: #3e6a13;
-    -fx-border-width: 3px;
-    -fx-padding: 20px;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
 
-    
+
 }
 
 .button {
     -fx-background-color: #3e6a13;
     -fx-text-fill: white;
     -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
 }
 
 .button:hover {
-    -fx-background-color: #eaf9d5; 
+    -fx-background-color: #acd599;
+    -fx-text-fill: #607f41;
 }
 
 .label {
-    -fx-text-fill: #333; 
-    -fx-font-size: 14px;
+    -fx-text-fill: #607f41;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 .dialog-pane .header .graphic {
-    -fx-opacity: 0; 
+    -fx-opacity: 0;
 }
+
