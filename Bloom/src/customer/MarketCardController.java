@@ -78,7 +78,7 @@ public class MarketCardController implements Initializable {
     @FXML
     void addToCart() {
         if (plantQuan.getValue() > 0) {
-            Connection con = con = DatabaseConnection.connectDB();
+            Connection con = DatabaseConnection.connectDB();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Plant Added");
             alert.setContentText("Plant is added to cart!");

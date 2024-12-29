@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -39,38 +38,25 @@ public class MarketPageController {
     @FXML
     private TextField searchTextField;
 
-    @FXML
-    void checkoutAction(ActionEvent event) {
-        Stage currentStage = (Stage) back.getScene().getWindow();
-        Navigation.navigateTo("/customer/CheckoutPage.fxml", currentStage);
-
-    }
-
     private ObservableList<Plant> cardListData;
-
-    Connection connection;
-    ResultSet resultSet;
-    PreparedStatement statement;
 
     public void initialize() {
         Navigation.setLastPage("/customer/MarketPage.fxml");
         try {
-            displayPlantCard();
+            cardListData = loadBrowseData(); // Load data once during initialization
+            displayPlantCard(cardListData); // Display all plants initially
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public ObservableList<Plant> loadBrowseData() {
-        String query = "SELECT * from plant";
-
+        String query = "SELECT * FROM plant";
         ObservableList<Plant> browseData = FXCollections.observableArrayList(); // Initialize the ObservableList
-        connection = DatabaseConnection.connectDB();
 
-        try {
-            statement = connection.prepareStatement(query);
-            resultSet = statement.executeQuery();
-            Plant plant;
+        try (Connection connection = DatabaseConnection.connectDB();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
                 byte[] imageBytes = resultSet.getBytes("image");
@@ -78,8 +64,8 @@ public class MarketPageController {
                 String characteristics = resultSet.getString("characteristics");
                 double price = resultSet.getDouble("price");
                 int id = resultSet.getInt("plantId");
-                int qun = resultSet.getInt("quantity");
-                plant = new Plant(imageBytes, plantName, characteristics, price, id, qun);
+                int quantity = resultSet.getInt("quantity");
+                Plant plant = new Plant(imageBytes, plantName, characteristics, price, id, quantity);
                 browseData.add(plant); // Add plant to the list
             }
 
@@ -90,27 +76,26 @@ public class MarketPageController {
         return browseData;
     }
 
-    public void displayPlantCard() {
-        cardListData = FXCollections.observableArrayList(loadBrowseData()); // Directly assign the list returned by loadBrowseData()
+    public void displayPlantCard(ObservableList<Plant> plantsToDisplay) {
+        browseGrid.getChildren().clear(); // Clear previous cards
+        browseGrid.getRowConstraints().clear();
+        browseGrid.getColumnConstraints().clear();
 
         int row = 0;
         int column = 0;
 
-        browseGrid.getChildren().clear();
-        browseGrid.getRowConstraints().clear();
-        browseGrid.getColumnConstraints().clear();
-
-        for (int i = 0; i < cardListData.size(); i++) {
-            if (cardListData.get(i).getQuantity() > 0) {
+        for (Plant plant : plantsToDisplay) {
+            if (plant.getQuantity() > 0) {
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/customer/MarketCard.fxml"));
                     AnchorPane pane = loader.load();
                     MarketCardController plantCard = loader.getController();
-                    plantCard.setPlantData(cardListData.get(i));
+                    plantCard.setPlantData(plant);
+
                     if (column == 1) {
                         column = 0;
-                        row += 1;
+                        row++;
                     }
 
                     browseGrid.add(pane, column++, row);
@@ -120,20 +105,28 @@ public class MarketPageController {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 
     @FXML
     public void searchPlant() {
+        String searchText = searchTextField.getText().toLowerCase().trim();
 
+        // Filter based on search text
+        ObservableList<Plant> filteredData = FXCollections.observableArrayList(
+            cardListData.filtered(plant -> 
+                plant.getName().toLowerCase().contains(searchText) // Use contains for better matching
+            )
+        );
+
+        // Display the filtered results
+        displayPlantCard(filteredData);
     }
 
-    public void checkOut() {
-
-    }
-
-    public void AddToCart() {
+    @FXML
+    void checkoutAction(ActionEvent event) {
+        Stage currentStage = (Stage) back.getScene().getWindow();
+        Navigation.navigateTo("/customer/CheckoutPage.fxml", currentStage);
     }
 
     @FXML

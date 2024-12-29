@@ -30,6 +30,7 @@ public class Plant {
     public Plant(int plantId, String name, String characteristic, String careInfo, double price, int quantity, List<String> fertilizationList) {
         this(plantId, name, characteristic, careInfo, price, quantity, fertilizationList, null);
     }
+   
 
     // Constructor for browsing
     public Plant(byte[] browseImage, String browseName, String browseCharacteristic, double browsePrice, int id, int qun) {

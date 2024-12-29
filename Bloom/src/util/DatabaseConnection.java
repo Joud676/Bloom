@@ -9,7 +9,7 @@ public class DatabaseConnection {
         
         final String DB_URL = "jdbc:mysql://localhost:3306/bloom";
         final String DB_USER = "root";
-        final String DB_PASSWORD = "100398";
+        final String DB_PASSWORD = "Rr120178593!";
         
         try {
             
